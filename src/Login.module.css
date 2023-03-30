@@ -1,0 +1,43 @@
+body {
+  background-color: #323232;
+  position: relative;
+}
+.container {
+  position: absolute;
+  width: 340px;
+  height: 497px;
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 40%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo {
+  width: 159px;
+  height: 174px;
+  margin-top: 4rem;
+  margin-bottom: 8rem;
+}
+.btn {
+  width: 244px;
+  height: 48px;
+  background-color: #FEE500;
+  border-width: 0;
+  border-radius: 0.7rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 3px 0px 13px -2px rgba(156,156,156,0.75);
+  -webkit-box-shadow: 3px 0px 13px -2px rgba(156,156,156,0.75);
+  -moz-box-shadow: 3px 0px 13px -2px rgba(156,156,156,0.75);
+}
+.kakao_img {
+  margin-left: 1.5rem;
+}
+.kakao_login {
+  margin-left: 2rem;
+  font-weight: bold;
+}
