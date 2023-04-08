@@ -25,6 +25,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.2rem;
   background: rgb(58,58,64);
   background: linear-gradient(180deg, rgba(58,58,64,1) 0%, rgba(0,0,0,1) 100%);
 }
@@ -40,4 +41,14 @@ code {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(58,58,64);
+  background: linear-gradient(180deg, rgba(58,58,64,1) 0%, rgba(0,0,0,1) 100%);
 }

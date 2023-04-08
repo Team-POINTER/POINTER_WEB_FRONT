@@ -1,12 +1,10 @@
 import React from 'react';
+import Header from '../components/Header/Header';
 
 export default function Home() {
   return (
-    <div >
-      <div>
-        <img src="./img/Text_logo.png" alt="" />
-      </div>
-    </div>
+    <>
+      <Header />
+    </>
   );
 }
-
