@@ -1,6 +1,7 @@
 .header {
   display: flex;
   flex-direction: row;
+  padding: 1rem 3rem;
 }
 .logo {
   margin: 0.1rem 0.3rem;
@@ -19,8 +20,6 @@
 .room, .user {
   background: transparent;
   color: var(--color-white);
-  outline: none;
-  border: none;
   cursor: pointer;
 }
 
