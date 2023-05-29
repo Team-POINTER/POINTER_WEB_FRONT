@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Login from './login/Login';
-import Home from './pages/Home';
+import { Login } from './login/Login';
+import { Home } from './pages/Home';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import NotFound from './pages/NotFound';
+import { NotFound } from './pages/NotFound';
 import App from './App';
 
 const router = createBrowserRouter([
