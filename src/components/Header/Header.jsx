@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Header.module.css'
 
-export default function Header() {
+export const Header = () => {
   return (
     <header className={styles.header}>
       <button className={styles.logo}>

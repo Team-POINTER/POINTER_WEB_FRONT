@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export const Login = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/home');
