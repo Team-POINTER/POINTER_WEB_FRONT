@@ -1,0 +1,62 @@
+[
+  {
+    "roomId": 1,
+    "title": "5",
+    "recentQuestion": "가장 친해지고 싶은 사람은 누구?",
+    "memberCnt": 5,
+    "roomWriter": "포인터",
+    "createdAt": "",
+    "updatedAt": "",
+    "isWriter": true,
+    "isJoined": true,
+    "sharedLink": "http://www.naver.com"
+  },
+  {
+    "roomId": 2,
+    "title": "4",
+    "recentQuestion": "가장 인상이 좋은 사람",
+    "memberCnt": 2,
+    "roomWriter": "포인터",
+    "createdAt": "",
+    "updatedAt": "",
+    "isWriter": true,
+    "isJoined": true,
+    "sharedLink": "http://www.naver.com"
+  },
+  {
+    "roomId": 3,
+    "title": "3",
+    "recentQuestion": "첫 인상이 가장 좋은 사람은?",
+    "memberCnt": 3,
+    "roomWriter": "곽민섭",
+    "createdAt": "",
+    "updatedAt": "",
+    "isWriter": true,
+    "isJoined": true,
+    "sharedLink": "http://www.naver.com"
+  },
+  {
+    "roomId": 4,
+    "title": "우리가족방",
+    "recentQuestion": "가장 친해지고 싶은 사람은?",
+    "memberCnt": 5,
+    "roomWriter": "곽민섭",
+    "createdAt": "",
+    "updatedAt": "",
+    "isWriter": true,
+    "isJoined": true,
+    "sharedLink": "http://www.naver.com"
+  },
+  {
+    "roomId": 5,
+    "title": "시디d반😊🫅",
+    "recentQuestion": "한 20년 뒤 미래에 가장 돈을 잘 벌 것같은 사람은 누구인가?",
+    "memberCnt": 5,
+    "roomWriter": "포인터",
+    "createdAt": "",
+    "updatedAt": "",
+    "isWriter": true,
+    "isJoined": true,
+    "sharedLink": "http://www.naver.com"
+  }
+]
