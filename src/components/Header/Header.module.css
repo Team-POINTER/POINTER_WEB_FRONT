@@ -1,7 +1,7 @@
 .header {
   display: flex;
   flex-direction: row;
-  padding: 1rem 3rem;
+  padding: 1rem;
 }
 .logo {
   margin: 0.1rem 0.3rem;
@@ -17,7 +17,8 @@
   margin-right: auto;
   padding: 0.1rem 0.3rem;
 }
-.room, .user {
+.room,
+.user {
   background: transparent;
   color: var(--color-white);
   cursor: pointer;

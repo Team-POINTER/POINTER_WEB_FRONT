@@ -1,11 +1,12 @@
-import React from 'react';
-import styles from './Header.module.css'
+import React from "react";
+import styled from "styled-components";
+import styles from "./Header.module.css";
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <button className={styles.logo}>
-        <img src="./img/Text_logo.png" alt="" className={styles.logoImg}/>
+        <img src="./img/Text_logo.png" alt="" className={styles.logoImg} />
       </button>
       <div className={styles.empty}></div>
       <section className={styles.section}>
@@ -14,5 +15,4 @@ export const Header = () => {
       </section>
     </header>
   );
-}
-
+};
