@@ -19,7 +19,10 @@
   flex-direction: row;
   align-items: center;
 }
-.room, .user, .addButton {
+
+.room, 
+.user, 
+.addButton {
   background: transparent;
   color: var(--color-white);
   cursor: pointer;
