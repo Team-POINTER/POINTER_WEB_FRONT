@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <button className={styles.logo}>
-        <img src="./img/Text_logo.png" alt="" className={styles.logoImg} />
+        <img src="/img/Text_logo.png" alt="POINTER 로고" className={styles.logoImg} />
       </button>
       <div className={styles.empty}></div>
       <nav className={styles.nav}>
