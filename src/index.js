@@ -7,6 +7,7 @@ import { Home } from './pages/Home';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { NotFound } from './pages/NotFound';
 import App from './App';
+import { UserPoint } from './pages/UserPoint';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
         element: <Home />,
         errorElement: <NotFound />
       },
-
+      {
+        path: '/home/user-point',
+        element: <UserPoint />,
+        errorElement: <NotFound />
+      },
     ]
   }
 ])

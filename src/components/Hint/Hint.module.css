@@ -1,0 +1,26 @@
+.container {
+  background-color: #333333;
+  width: 339px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 4.78px 12.78px;
+  border-radius: 0.5rem;
+}
+
+.num {
+  color: #929292;
+  font-size: 13px;
+  margin-left: 0.8rem;
+  font-weight: bold;
+}
+
+.text {
+  color: white;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 276px;
+  font-size: 15px;
+}
+
