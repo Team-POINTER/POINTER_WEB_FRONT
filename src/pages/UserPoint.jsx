@@ -9,6 +9,7 @@ const PointBtn = styled.button`
   background-color: #FF2301;
   border-radius: 1rem;
   color: white;
+  cursor: pointer;
 `;
 
 export const UserPoint = () => {
@@ -16,7 +17,7 @@ export const UserPoint = () => {
     <>
       <Header />
       <HintSection />
-      <PointBtn> <img src="/img/POINTER_btn.png" alt="" /> </PointBtn>
+      <PointBtn> <img src="/img/POINT_btn.png" alt="" /> </PointBtn>
     </>
   );
 }
