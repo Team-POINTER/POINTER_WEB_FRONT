@@ -83,6 +83,19 @@ const EditWrap = styled.div`
   z-index: 4;
   width: 100%;
   margin: 0 auto;
+  animation: 0.4s ease-in-out loadEffect2;
+
+  @keyframes loadEffect2 {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
 `;
 
 const EditBox = styled.div`
