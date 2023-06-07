@@ -169,7 +169,6 @@ export const RoomBox = ({ roomData }) => {
           backdropFilter: "blur(20px)",
         }}
         open={open}
-        onClick={handleClose}
       >
         {open && (
           <EditWrap>
