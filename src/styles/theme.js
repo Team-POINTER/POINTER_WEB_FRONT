@@ -43,6 +43,16 @@ const Font = (size, lineHeight, weight) => {
     `;
 };
 
+const M_18 = () => {
+  return `
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  `;
+};
+
 const Body = (bold) => {
   return `
     font-family: 'Noto Sans KR';
@@ -106,36 +116,11 @@ const H3 = () => {
 };
 
 const colors = {
-  primary_5: "rgba(0, 175, 142, 0.05)",
-  primary_10: "rgba(0, 175, 142, 0.1)",
-  primary_20: "rgba(0, 175, 142, 0.2)",
-  primary: "#00AF8E",
-  primary_dark: "#00997D",
-  purple: "#671BB2",
-  purple_10: "rgba(103, 27, 178, 0.1)",
-  purple_20: "rgba(103, 27, 178, 0.2)",
-  red: "#DC3545",
-  blue: "#395FE5",
-  blue_10: "rgba(57, 95, 230, 0.1)",
-  cyan: "#17A2B8",
-  cyan_10: "rgba(23, 162, 184, 0.1)",
-  warning_yellow: "#F2D024",
-  warning_red: "#DC3545",
   black: "#000000",
-  black_25: "rgba(0, 0, 0, 0.25)",
-  black_10: "rgba(0, 0, 0, 0.1)",
   white: "#ffffff",
-  white_25: "rgba(255, 255, 255, 0.25)",
   yellow: "#F2D024",
-  gray100: "#172D44",
-  gray200: "#3A4A59",
-  gray300: "#6C757D",
-  gray400: "#979CA4",
-  gray500: "#C1C5CB",
-  gray600: "#D7DADE",
-  gray700: "#E8EAED",
-  gray800: "#F2F3F5",
-  gray900: "#F9FAFC",
+  gray70: "#605F5F",
+  orangered: "#FF2301",
 };
 
 const scrollX = () => {
@@ -172,6 +157,8 @@ const size = {
 
 const theme = {
   scrollY,
+  colors,
+  M_18,
 };
 
 export default theme;

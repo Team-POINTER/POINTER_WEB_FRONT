@@ -15,8 +15,27 @@ const WriterMark = (props) => (
   </svg>
 );
 
+const RoomEdit = (props) => (
+  <svg
+    width="4"
+    height="18"
+    viewBox="0 0 4 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="1.69141" cy="1.6377" r="1.5" fill="black" />
+    <circle cx="1.69141" cy="8.6377" r="1.5" fill="black" />
+    <circle cx="1.69141" cy="15.6377" r="1.5" fill="black" />
+  </svg>
+);
+
 const Icon = ({ icon, color, width, background, height }) => {
-  return <i>{icon === "writerMark" && <WriterMark width={width} />}</i>;
+  return (
+    <i>
+      {icon === "writerMark" && <WriterMark width={width} />}
+      {icon === "roomEdit" && <RoomEdit width={width} />}
+    </i>
+  );
 };
 
 export default Icon;
