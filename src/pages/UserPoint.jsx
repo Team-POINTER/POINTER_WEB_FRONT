@@ -5,6 +5,10 @@ import { HintSection } from '../components/Hint/HintSection';
 import userList from "../mock/user-cell.json";
 import { UserBox } from '../components/UserList/UserBox';
 
+const Wrap = styled.div`
+  margin: 0 auto;
+`;
+
 const PointBtn = styled.button`
   width: 124px;
   height: 39px;
@@ -17,6 +21,7 @@ const PointBtn = styled.button`
 const Container = styled.div`
   margin: auto;
   display: flex;
+  height: 70vh;
   flex-direction: column;
   align-items: center;
 `;
@@ -48,7 +53,7 @@ const Notice = styled.p`
 
 export const UserPoint = () => {
   return (
-    <>
+    <Wrap>
       <Header />
       <Container>
         <HintSection />
@@ -60,6 +65,6 @@ export const UserPoint = () => {
           </StyledUl>
         )}
       </Container>
-    </>
+    </Wrap>
   );
 }
