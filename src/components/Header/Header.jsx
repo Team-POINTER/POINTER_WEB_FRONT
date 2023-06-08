@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -19,9 +20,11 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <button className={styles.logo}>
-        <img src="/img/Text_logo.png" alt="POINTER 로고" className={styles.logoImg} />
-      </button>
+      <Link to='/home'>
+        <button className={styles.logo}>
+          <img src="/img/Text_logo.png" alt="POINTER 로고" className={styles.logoImg} />
+        </button>
+      </Link>
       <div className={styles.empty}></div>
       <nav className={styles.nav}>
         {windowWidth <= 820 ? (
