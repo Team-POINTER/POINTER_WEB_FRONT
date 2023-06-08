@@ -1,0 +1,19 @@
+.userBox {
+  background-color: white;
+  display: flex;
+  display: inline-block;
+  flex-direction: row;
+  width: 291px;
+  height: 44px;
+  font-weight: bold;
+  justify-content: center;
+  margin: 6.5px 11px;
+  padding-left: 17px;
+  border-radius: 1.3rem;
+  cursor: pointer;
+}
+.textContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
