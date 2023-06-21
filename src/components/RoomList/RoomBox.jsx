@@ -7,6 +7,7 @@ import theme from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { setUpdateRoomForm } from "../../modules/room";
 import { EditRoomName } from "./EditRoomName";
+import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
   width: 303.1px;
@@ -216,6 +217,7 @@ export const RoomBox = ({ roomData }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [editNameOpen, setEditNameOpen] = useState(false);
+  const navigate = useNavigate();
   const handleClose = () => {
     setOpen(false);
   };
@@ -226,6 +228,10 @@ export const RoomBox = ({ roomData }) => {
   const openRoomNameUpdate = (data) => {
     dispatch(setUpdateRoomForm(data));
     setEditNameOpen(true);
+  };
+
+  const moveToQuestionResult = () => {
+    navigate("/result");
   };
 
   return (
@@ -243,6 +249,12 @@ export const RoomBox = ({ roomData }) => {
               <Icon icon="writerMark" />
             </IconBox>
             <Writer>{roomData.roomWriter}님</Writer>
+            <span
+              style={{ fontSize: "12px", cursor: "pointer" }}
+              onClick={moveToQuestionResult}
+            >
+              결과보기
+            </span>
           </BottomLeft>
           <IconBox onClick={handleOpen}>
             <Icon icon="roomEdit" />

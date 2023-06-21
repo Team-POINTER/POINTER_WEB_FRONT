@@ -1,7 +1,7 @@
 .container {
   width: 340px;
   height: 497px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 1.5rem;
   margin: auto;
   display: flex;
@@ -18,14 +18,14 @@
 .btn {
   width: 244px;
   height: 48px;
-  background-color: #FEE500;
+  background-color: #fee500;
   border-width: 0;
   border-radius: 0.7rem;
   display: flex;
   align-items: center;
-  box-shadow: 3px 0px 13px -2px rgba(156,156,156,0.75);
-  -webkit-box-shadow: 3px 0px 13px -2px rgba(156,156,156,0.75);
-  -moz-box-shadow: 3px 0px 13px -2px rgba(156,156,156,0.75);
+  box-shadow: 3px 0px 13px -2px rgba(156, 156, 156, 0.75);
+  -webkit-box-shadow: 3px 0px 13px -2px rgba(156, 156, 156, 0.75);
+  -moz-box-shadow: 3px 0px 13px -2px rgba(156, 156, 156, 0.75);
 }
 .btn:hover {
   cursor: pointer;
