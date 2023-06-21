@@ -1,36 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import { Login } from './login/Login';
-import { Home } from './pages/Home';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { NotFound } from './pages/NotFound';
-import App from './App';
-import { UserPoint } from './pages/UserPoint';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import { Login } from "./login/Login";
+import { Home } from "./pages/Home";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { NotFound } from "./pages/NotFound";
+import App from "./App";
+import { UserPoint } from "./pages/UserPoint";
+import { QuestionResult } from "./pages/QuestionResult";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Login />, errorElement: <NotFound /> },
       {
-        path: '/home',
+        path: "/home",
         element: <Home />,
-        errorElement: <NotFound />
+        errorElement: <NotFound />,
       },
       {
-        path: '/home/user-point',
-        element: <UserPoint />,
-        errorElement: <NotFound />
+        path: "/result",
+        element: <QuestionResult />,
+        errorElement: <NotFound />,
       },
-    ]
-  }
-])
+      {
+        path: "/home/user-point",
+        element: <UserPoint />,
+        errorElement: <NotFound />,
+      },
+    ],
+  },
+]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
