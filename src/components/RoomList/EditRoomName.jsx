@@ -3,6 +3,8 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { Backdrop } from "@mui/material";
+import { setUpdateRoomForm } from "../../modules/room";
+import { useEffect } from "react";
 
 const Wrap = styled.div`
   position: absolute;
@@ -69,11 +71,28 @@ const Input = styled.input`
   padding-left: 12px;
 `;
 
+const InputBox = styled.div`
+  position: relative;
+`;
+
+const InputCnt = styled.span`
+  position: absolute;
+  top: 8px;
+  right: 10px;
+
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: ${theme.colors.grayscale_60};
+`;
+
 const Bottom = styled.div`
   display: flex;
   width: 100%;
   height: 45px;
-  margin-top: 22px;
+  margin-top: 24px;
   border-top: 1px solid ${theme.colors.grayscale_60};
 `;
 
@@ -81,13 +100,40 @@ const BottomBtn = styled.div`
   width: 50%;
   ${theme.FlexCenter}
   cursor: pointer;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 170%;
 `;
 
 export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
   const { updateRoomForm } = useSelector((state) => state.room);
+  const [title, setTitle] = useState(null);
+  const dispatch = useDispatch();
   const update = () => {
     setEditNameOpen(false);
   };
+
+  const changeRoomName = (e) => {
+    const { name, value } = e.target;
+
+    if (value.length > 15) {
+      value.substring(0, 16);
+    }
+    dispatch(
+      setUpdateRoomForm({
+        ...updateRoomForm,
+        [name]: value,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (!title && updateRoomForm.title) {
+      setTitle(updateRoomForm.title);
+    }
+  }, [updateRoomForm]);
+
   return (
     <Backdrop
       sx={{
@@ -97,36 +143,42 @@ export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
       }}
       open={editNameOpen}
     >
-      <Wrap>
-        <Container>
-          <Box>
-            <Title>룸 이름 편집</Title>
-            <Comment>
-              {"'" + updateRoomForm.title + "'의 새로운 이름을 입력하세요."}
-            </Comment>
-            <div>
-              <Input value={updateRoomForm.title} />
-            </div>
-            <Bottom>
-              <BottomBtn
-                onClick={() => setEditNameOpen(false)}
-                style={{ color: theme.colors.grayscale_60 }}
-              >
-                취소
-              </BottomBtn>
-              <BottomBtn
-                onClick={update}
-                style={{
-                  color: theme.colors.orangered,
-                  borderLeft: "1px solid" + theme.colors.grayscale_60,
-                }}
-              >
-                완료
-              </BottomBtn>
-            </Bottom>
-          </Box>
-        </Container>
-      </Wrap>
+      {updateRoomForm.title && (
+        <Wrap>
+          <Container>
+            <Box>
+              <Title>룸 이름 편집</Title>
+              <Comment>{"'" + title + "'의 새로운 이름을 입력하세요."}</Comment>
+              <InputBox>
+                <Input
+                  name={"title"}
+                  value={updateRoomForm.title}
+                  maxLength={15}
+                  onChange={changeRoomName}
+                />
+                <InputCnt>{updateRoomForm.title.length + " / " + 15}</InputCnt>
+              </InputBox>
+              <Bottom>
+                <BottomBtn
+                  onClick={() => setEditNameOpen(false)}
+                  style={{ color: theme.colors.grayscale_60 }}
+                >
+                  취소
+                </BottomBtn>
+                <BottomBtn
+                  onClick={update}
+                  style={{
+                    color: theme.colors.orangered,
+                    borderLeft: "1px solid" + theme.colors.grayscale_60,
+                  }}
+                >
+                  완료
+                </BottomBtn>
+              </Bottom>
+            </Box>
+          </Container>
+        </Wrap>
+      )}
     </Backdrop>
   );
 };
