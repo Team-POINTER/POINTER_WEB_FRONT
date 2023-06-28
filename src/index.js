@@ -10,6 +10,7 @@ import App from "./App";
 import { UserPoint } from "./pages/UserPoint";
 import { QuestionResult } from "./pages/QuestionResult";
 import { CreateQuestion } from "./components/RoomList/detail/CreateQuestion";
+import { PointResult } from "./pages/PointResult";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
       {
         path: "/home/user-point",
         element: <UserPoint />,
+        errorElement: <NotFound />,
+      },
+      {
+        path: "point-result",
+        element: <PointResult />,
         errorElement: <NotFound />,
       },
     ],
