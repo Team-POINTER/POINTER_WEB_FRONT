@@ -4,6 +4,10 @@ import styled from "styled-components";
 import Icon from "../../icon/Icon";
 import IconBox from "../../icon/IconBox";
 import theme from "../../styles/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { setUpdateRoomForm } from "../../modules/room";
+import { EditRoomName } from "./EditRoomName";
+import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
   width: 303.1px;
@@ -133,14 +137,103 @@ const EditClose = styled(EditDiv)`
   height: 70px;
 `;
 
+const EditRoomNameBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0px;
+
+  width: 270px;
+  height: 185px;
+
+  background: rgba(232, 233, 243, 0.8);
+  backdrop-filter: blur(11px);
+  border-radius: 14px;
+`;
+
+const EditRoomNameTitle = styled.div`
+  height: 26px;
+  margin-bottom: 3px;
+  margin-top: 16px;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 150%;
+  /* identical to box height, or 26px */
+
+  text-align: center;
+
+  /* grayscale/black */
+
+  color: #121212;
+`;
+
+const EditRoomNameComment = styled.div`
+  height: 20px;
+
+  margin-bottom: 16px;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 150%;
+  /* identical to box height, or 20px */
+
+  text-align: center;
+
+  /* grayscale/black */
+
+  color: #121212;
+`;
+
+const EditRoomNameInput = styled.input`
+  width: 219px;
+  height: 31px;
+  border: none;
+  border-radius: 25px;
+  &:focus {
+    outline: none;
+  }
+  padding-left: 12px;
+`;
+
+const EditRoomNameBottom = styled.div`
+  display: flex;
+  width: 100%;
+  height: 45px;
+  margin-top: 22px;
+  border-top: 1px solid ${theme.colors.grayscale_60};
+`;
+
+const EditRoomNameBottomBtn = styled.div`
+  width: 50%;
+  ${theme.FlexCenter}
+  cursor: pointer;
+`;
+
 export const RoomBox = ({ roomData }) => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [editNameOpen, setEditNameOpen] = useState(false);
+  const navigate = useNavigate();
   const handleClose = () => {
     setOpen(false);
   };
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const openRoomNameUpdate = (data) => {
+    dispatch(setUpdateRoomForm(data));
+    setEditNameOpen(true);
+  };
+
+  const moveToQuestionResult = () => {
+    navigate("/result");
+  };
+
   return (
     <>
       <Wrap>
@@ -156,6 +249,12 @@ export const RoomBox = ({ roomData }) => {
               <Icon icon="writerMark" />
             </IconBox>
             <Writer>{roomData.roomWriter}님</Writer>
+            <span
+              style={{ fontSize: "12px", cursor: "pointer" }}
+              onClick={moveToQuestionResult}
+            >
+              결과보기
+            </span>
           </BottomLeft>
           <IconBox onClick={handleOpen}>
             <Icon icon="roomEdit" />
@@ -174,7 +273,9 @@ export const RoomBox = ({ roomData }) => {
           <EditWrap>
             <EditBox>
               <EditContainer>
-                <EditDiv>{"'" + roomData.title + "'의 이름 편집"}</EditDiv>
+                <EditDiv onClick={() => openRoomNameUpdate(roomData)}>
+                  {"'" + roomData.title + "'의 이름 편집"}
+                </EditDiv>
                 <hr />
                 <EditDiv>{"'" + roomData.title + "'에 링크로 초대"}</EditDiv>
                 <hr />
@@ -184,6 +285,12 @@ export const RoomBox = ({ roomData }) => {
               </EditContainer>
               <EditClose onClick={handleClose}>{"취소"}</EditClose>
             </EditBox>
+            {editNameOpen && (
+              <EditRoomName
+                setEditNameOpen={setEditNameOpen}
+                editNameOpen={editNameOpen}
+              />
+            )}
           </EditWrap>
         )}
       </Backdrop>

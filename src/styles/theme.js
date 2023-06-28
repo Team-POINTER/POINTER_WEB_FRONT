@@ -121,6 +121,7 @@ const colors = {
   yellow: "#F2D024",
   gray70: "#605F5F",
   orangered: "#FF2301",
+  grayscale_60: "#575A6B",
 };
 
 const scrollX = () => {
@@ -159,6 +160,7 @@ const theme = {
   scrollY,
   colors,
   M_18,
+  FlexCenter,
 };
 
 export default theme;

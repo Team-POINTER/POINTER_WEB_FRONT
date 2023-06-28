@@ -1,0 +1,22 @@
+[
+  {
+    "roomId": 1,
+    "questionId": 1,
+    "questionName": "한 20년 뒤 미래에 가장 돈을 잘 벌 것 같은 사람은 누구인가?최대 공백포함 45",
+    "memberList": [
+      {
+        "memberId": 1,
+        "name": "Jane Cooper"
+      },
+      {
+        "memberId": 2,
+        "name": "Ronald Richard"
+      },
+      {
+        "memberId": 3,
+        "name": "내가누구게"
+      }
+    ],
+    "createdAt": "2023.03.02"
+  }
+]
