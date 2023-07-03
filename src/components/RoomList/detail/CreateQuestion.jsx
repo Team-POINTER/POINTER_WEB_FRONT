@@ -14,17 +14,20 @@ const Wrap = styled.div`
 `;
 
 const Head = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 40px;
   padding-bottom: 0px;
-  justify-content: center;
   align-items: center;
+
   flex-shrink: 0;
   padding-top: 60px;
+  justify-content: space-evenly;
 
   @media screen and (max-width: 834px) {
-    padding-top: 8px;
+    padding: 16px 16px 0px 16px;
+    justify-content: center;
   }
 `;
 
@@ -129,6 +132,52 @@ const LinkCopy = styled.div`
   line-height: 150%;
 `;
 
+const RoomName = styled.div`
+  color: var(--grayscale-white, #fbfcff);
+  text-align: center;
+
+  /* 15/m */
+  font-size: 15px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 170%;
+`;
+
+const SmallComment = styled.div`
+  color: var(--grayscale-40, #797d94);
+  text-align: center;
+  font-size: 12px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  position: absolute;
+  top: 80px;
+`;
+
+const LargeComment = styled.div`
+  color: var(--grayscale-40, #797d94);
+  text-align: center;
+  font-size: 12px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+`;
+
+const UserName = styled.div`
+  color: var(--white, #fff);
+  text-align: right;
+  font-size: 16px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%;
+  text-decoration-line: underline;
+  cursor: pointer;
+`;
+
 export const CreateQuestion = ({}) => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -145,11 +194,39 @@ export const CreateQuestion = ({}) => {
 
   return (
     <Wrap>
-      <Head>
-        <IconBox>
-          <Icon icon="back" />
-        </IconBox>
-      </Head>
+      {width <= 854 ? (
+        <Head>
+          <div style={{ position: "absolute", left: "16px" }}>
+            <IconBox>
+              <Icon icon="back" />
+            </IconBox>
+          </div>
+          <RoomName>룸 이름</RoomName>
+          <SmallComment>
+            해당 룸에 하고 싶은 질문을 작성해주세요! <br />
+            24시간마다 선착순 1명이 질문할 수 있습니다.
+          </SmallComment>
+        </Head>
+      ) : (
+        <Head>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <IconBox>
+              <Icon icon="back" />
+            </IconBox>
+            <RoomName>룸 이름</RoomName>
+          </div>
+          <div>
+            <LargeComment>
+              해당 룸에 하고 싶은 질문을 작성해주세요! 24시간마다 선착순 1명이
+              질문할 수 있습니다.
+            </LargeComment>
+          </div>
+          <div>
+            <UserName>포인터님</UserName>
+          </div>
+        </Head>
+      )}
+
       <Content>
         <InputBox>
           {width > 834 ? (
