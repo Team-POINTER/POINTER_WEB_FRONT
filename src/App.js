@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import store from "./store";
 import { Home } from "./pages/Home";
 import { QuestionResult } from "./pages/QuestionResult";
+import { CreateQuestion } from "./components/RoomList/detail/CreateQuestion";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="home" element={<Home />} />
         <Route path="result" element={<QuestionResult />} />
+        <Route path="question" element={<CreateQuestion />} />
         <Route path="*" element={<div>없는 페이지입니다.</div>}></Route>
       </Routes>
     </Provider>
