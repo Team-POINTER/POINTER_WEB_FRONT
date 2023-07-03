@@ -21,15 +21,14 @@ const Head = styled.div`
   width: 100%;
   height: 40px;
   padding-bottom: 0px;
-  align-items: center;
 
+  justify-content: center;
+  align-items: center;
   flex-shrink: 0;
   padding-top: 60px;
-  justify-content: space-evenly;
 
   @media screen and (max-width: 834px) {
-    padding: 16px 16px 0px 16px;
-    justify-content: center;
+    padding-top: 8px;
   }
 `;
 
@@ -286,7 +285,6 @@ export const CreateQuestion = ({}) => {
           </div>
         </Head>
       )}
-
       <Content>
         <InputBox>
           {width > 834 ? (
