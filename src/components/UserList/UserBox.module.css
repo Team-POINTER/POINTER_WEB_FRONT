@@ -2,7 +2,7 @@
   background-color: white;
   display: flex;
   display: inline-block;
-  flex-direction: row;
+  flex-direction: column;
   width: 291px;
   height: 44px;
   font-weight: bold;
@@ -16,4 +16,8 @@
   display: flex;
   align-items: center;
   height: 100%;
+  padding-right: 0.8rem;
+}
+.empty{
+  flex: 1 1 0;
 }

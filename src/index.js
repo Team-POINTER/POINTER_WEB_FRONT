@@ -9,6 +9,7 @@ import { NotFound } from "./pages/NotFound";
 import App from "./App";
 import { UserPoint } from "./pages/UserPoint";
 import { QuestionResult } from "./pages/QuestionResult";
+import { PointResult } from "./pages/PointResult";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
         element: <UserPoint />,
         errorElement: <NotFound />,
       },
+      {
+        path: "point-result",
+        element: <PointResult />,
+        errorElement: <NotFound />
+      }
     ],
   },
 ]);
