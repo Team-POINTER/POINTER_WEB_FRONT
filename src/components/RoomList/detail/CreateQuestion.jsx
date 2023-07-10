@@ -249,11 +249,12 @@ export const CreateQuestion = ({}) => {
 
   const returnToRoom = () => {
     handleClose();
+    navigate("/home/user-point");
   };
 
   return (
     <Wrap>
-      {width <= 854 ? (
+      {width <= 834 ? (
         <Head>
           <div style={{ position: "absolute", left: "16px" }}>
             <IconBox>
@@ -274,13 +275,13 @@ export const CreateQuestion = ({}) => {
             </IconBox>
             <RoomName>룸 이름</RoomName>
           </div>
-          <div>
+          <div style={{ marginLeft: width > 1200 ? "229px" : "51px" }}>
             <LargeComment>
               해당 룸에 하고 싶은 질문을 작성해주세요! 24시간마다 선착순 1명이
               질문할 수 있습니다.
             </LargeComment>
           </div>
-          <div>
+          <div style={{ marginLeft: width > 1200 ? "270px" : "79px" }}>
             <UserName>포인터님</UserName>
           </div>
         </Head>
