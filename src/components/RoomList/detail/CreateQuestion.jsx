@@ -252,12 +252,16 @@ export const CreateQuestion = ({}) => {
     navigate("/home/user-point");
   };
 
+  const returnToMain = () => {
+    navigate("/home");
+  };
+
   return (
     <Wrap>
       {width <= 834 ? (
         <Head>
           <div style={{ position: "absolute", left: "16px" }}>
-            <IconBox>
+            <IconBox onClick={returnToMain}>
               <Icon icon="back" />
             </IconBox>
           </div>
@@ -270,7 +274,7 @@ export const CreateQuestion = ({}) => {
       ) : (
         <Head>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <IconBox>
+            <IconBox onClick={returnToMain}>
               <Icon icon="back" />
             </IconBox>
             <RoomName>룸 이름</RoomName>
