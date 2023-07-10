@@ -2,56 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { Login } from "./login/Login";
-import { Home } from "./pages/Home";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { NotFound } from "./pages/NotFound";
 import App from "./App";
-import { UserPoint } from "./pages/UserPoint";
-import { QuestionResult } from "./pages/QuestionResult";
-import { CreateQuestion } from "./components/RoomList/detail/CreateQuestion";
-import { PointResult } from "./pages/PointResult";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <NotFound />,
-    children: [
-      { index: true, element: <Login />, errorElement: <NotFound /> },
-      {
-        path: "/home",
-        element: <Home />,
-        errorElement: <NotFound />,
-      },
-      {
-        path: "/result",
-        element: <QuestionResult />,
-        errorElement: <NotFound />,
-      },
-      {
-        path: "/question",
-        element: <CreateQuestion />,
-        errorElement: <NotFound />,
-      },
-      {
-        path: "/home/user-point",
-        element: <UserPoint />,
-        errorElement: <NotFound />,
-      },
-      {
-        path: "point-result",
-        element: <PointResult />,
-        errorElement: <NotFound />
-      }
-    ],
-  },
-]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>
 );
 
