@@ -42,8 +42,8 @@ const router = createBrowserRouter([
       {
         path: "point-result",
         element: <PointResult />,
-        errorElement: <NotFound />,
-      },
+        errorElement: <NotFound />
+      }
     ],
   },
 ]);

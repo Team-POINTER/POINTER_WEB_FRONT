@@ -17,7 +17,6 @@ function App() {
         <Route path="result" element={<QuestionResult />} />
         <Route path="question" element={<CreateQuestion />} />
         <Route path="point-result" element={<PointResult />} />
-        <Route path="question" element={<CreateQuestion />} />
         <Route path="*" element={<div>없는 페이지입니다.</div>}></Route>
       </Routes>
     </Provider>
