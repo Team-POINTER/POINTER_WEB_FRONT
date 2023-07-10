@@ -29,11 +29,40 @@ const RoomEdit = (props) => (
   </svg>
 );
 
+const Back = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+  >
+    <g id="back">
+      <rect
+        id="Rectangle 30"
+        width="40"
+        height="40"
+        rx="20"
+        fill="#A7B2CE"
+        fill-opacity="0.3"
+      />
+      <path
+        id="Vector 10 (Stroke)"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M21.9224 12.7436C21.5976 12.4188 21.071 12.4188 20.7462 12.7436L14.0779 19.4119C13.7531 19.7367 13.7531 20.2633 14.0779 20.5881L20.7462 27.2564C21.071 27.5812 21.5976 27.5812 21.9224 27.2564C22.2472 26.9316 22.2472 26.405 21.9224 26.0802L15.8422 20L21.9224 13.9198C22.2472 13.595 22.2472 13.0684 21.9224 12.7436Z"
+        fill="#FBFCFF"
+      />
+    </g>
+  </svg>
+);
+
 const Icon = ({ icon, color, width, background, height }) => {
   return (
     <i>
       {icon === "writerMark" && <WriterMark width={width} />}
       {icon === "roomEdit" && <RoomEdit width={width} />}
+      {icon === "back" && <Back width={width} />}
     </i>
   );
 };
