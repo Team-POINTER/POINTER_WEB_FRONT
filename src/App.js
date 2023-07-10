@@ -7,18 +7,23 @@ import { QuestionResult } from "./pages/QuestionResult";
 import { CreateQuestion } from "./components/RoomList/detail/CreateQuestion";
 import { UserPoint } from "./pages/UserPoint";
 import { PointResult } from "./pages/PointResult";
+import { NotFound } from "./pages/NotFound";
+import { Login } from "./login/Login";
 
 function App() {
   return (
     <Provider store={store}>
-      <Routes>
-        <Route path="home" element={<Home />} />
-        <Route path="home/user-point" element={<UserPoint />} />
-        <Route path="result" element={<QuestionResult />} />
-        <Route path="question" element={<CreateQuestion />} />
-        <Route path="point-result" element={<PointResult />} />
-        <Route path="*" element={<div>없는 페이지입니다.</div>}></Route>
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="" element={<Login />} />
+          <Route path="home" element={<Home />} />
+          <Route path="home/user-point" element={<UserPoint />} />
+          <Route path="result" element={<QuestionResult />} />
+          <Route path="question" element={<CreateQuestion />} />
+          <Route path="point-result" element={<PointResult />} />
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </Router>
     </Provider>
   );
 }
