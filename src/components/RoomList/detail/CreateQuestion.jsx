@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Icon from "../../../icon/Icon";
 import IconBox from "../../../icon/IconBox";
 import { useEffect } from "react";
+import { Backdrop } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
   width: 100%;
@@ -178,8 +180,62 @@ const UserName = styled.div`
   cursor: pointer;
 `;
 
+const AlreadyCreatedAlert = styled.div`
+  width: 331px;
+  height: 193px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  background: #fff;
+
+  /* 1 */
+  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.1);
+`;
+
+const CommentBox = styled.div`
+  color: var(--gray-70, #605f5f);
+  text-align: center;
+  height: 130px;
+  /* M 18 */
+  font-size: 18px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ReturnButton = styled.div`
+  cursor: pointer;
+  color: var(--black, #000);
+  text-align: center;
+  font-size: 18px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+`;
+
+const BoxHr = styled.div`
+  width: 100%;
+  height: 1px;
+  flex-shrink: 0;
+  background-color: #929292;
+  margin-bottom: 16px;
+`;
+
 export const CreateQuestion = ({}) => {
   const [width, setWidth] = useState(window.innerWidth);
+  const [open, setOpen] = useState(false);
+  const [editNameOpen, setEditNameOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleResize = () => {
     setWidth(window.innerWidth);
@@ -191,6 +247,10 @@ export const CreateQuestion = ({}) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const returnToRoom = () => {
+    handleClose();
+  };
 
   return (
     <Wrap>
@@ -247,11 +307,28 @@ export const CreateQuestion = ({}) => {
         </InputBox>
       </Content>
       <Bottom>
-        <RegisterBtn>
+        <RegisterBtn onClick={handleOpen}>
           질문 등록하기<span>22:22:11</span>
         </RegisterBtn>
         <LinkCopy>링크로 초대</LinkCopy>
       </Bottom>
+
+      <Backdrop
+        sx={{
+          zIndex: 3,
+          background: "rgba(0, 0, 0, 0.5)",
+          backdropFilter: "blur(20px)",
+        }}
+        open={open}
+      >
+        {open && (
+          <AlreadyCreatedAlert>
+            <CommentBox>다른 사람이 질문을 이미 등록했습니다.</CommentBox>
+            <BoxHr />
+            <ReturnButton onClick={returnToRoom}>돌아가기</ReturnButton>
+          </AlreadyCreatedAlert>
+        )}
+      </Backdrop>
     </Wrap>
   );
 };
