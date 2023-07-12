@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const KakaoCallBack = () => {
-
+  const navigate = useNavigate();
   useEffect(() => {
 
     const params = new URL(document.location.toString()).searchParams;
@@ -42,6 +43,8 @@ export const KakaoCallBack = () => {
             .then((res) => {
               console.log("데이터 성공 : ");
               console.log(res);
+              /* 유저 정보 받을 시 home으로 이동 */
+              navigate("/home");
             })
         } else {
           console.log("access_token 없음");
