@@ -28,10 +28,21 @@ export const KakaoCallBack = () => {
         if(access_token) {
           console.log(`Bearer ${access_token}`);
           /* access_token 서버에 전송 */
-          // axios
-          //   .post(
-              
-          //   )
+          axios
+            .post(
+              `https://kapi.kakao.com/v2/user/me`,
+              {},
+              {
+                headers: {
+                  Authorization: `Bearer ${access_token}`,
+                  "Content-type": "application/x-www-form-urlencoded;charset=utf-8"
+                },
+              }   
+            )
+            .then((res) => {
+              console.log("데이터 성공 : ");
+              console.log(res);
+            })
         } else {
           console.log("access_token 없음");
         }
