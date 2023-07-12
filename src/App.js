@@ -9,13 +9,20 @@ import { UserPoint } from "./pages/UserPoint";
 import { PointResult } from "./pages/PointResult";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./login/Login";
+import { KakaoCallBack } from "./login/Kakao/KakaoCallBack";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="" element={<Login />} />
+          <Route path="/">
+            <Route path="/" element={<Login />} />
+            <Route
+              path="/auth/kakao/callback"
+              element={<KakaoCallBack />}
+            />
+          </Route>
           <Route path="home" element={<Home />} />
           <Route path="home/user-point" element={<UserPoint />} />
           <Route path="result" element={<QuestionResult />} />
