@@ -6,6 +6,7 @@ import userList from "../mock/user-cell.json";
 import { UserBox } from '../components/UserList/UserBox';
 import { UserListSection } from '../components/UserList/UserListSection';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -68,6 +69,42 @@ export const UserPoint = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectedUserNames, setSelectedUserNames] = useState([]);
   const [question, setQuestion] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  /*
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}questions/current/1/1`, 
+          {
+            headers: {
+              
+            },
+          }
+        );
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+  */
+  /* mock 데이터 */
+  useEffect(() => {
+    // Update the selected user names whenever selectedUsers changes
+    const names = selectedUsers.map(user => user.userName);
+    setSelectedUserNames(names);
+  }, [selectedUsers]);
+
+  if(loading) {
+    return <h1>로딩중</h1>
+  };
+
 
   const handleUserSelect = (user) => {
     setSelectedUsers((prevSelectedUsers) => {
@@ -79,13 +116,9 @@ export const UserPoint = () => {
     });
   };
 
-  useEffect(() => {
-    // Update the selected user names whenever selectedUsers changes
-    const names = selectedUsers.map(user => user.userName);
-    setSelectedUserNames(names);
-  }, [selectedUsers]);
+  
 
-  const navigate = useNavigate();
+  
   const handlePointBtnClick = () => {
     // 선택된 사용자 정보를 출력
     console.log(selectedUsers);
