@@ -52,9 +52,21 @@ const Notice = styled.p`
   color: #929292;
 `;
 
+const Question = styled.p`
+  color: var(--white, #FFF);
+  text-align: center;
+  /* M 18 */
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+`
+
 export const UserPoint = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectedUserNames, setSelectedUserNames] = useState([]);
+  const [question, setQuestion] = useState('');
 
   const handleUserSelect = (user) => {
     setSelectedUsers((prevSelectedUsers) => {
@@ -83,6 +95,7 @@ export const UserPoint = () => {
       <Container>
         <HintSection />
         <UserListSection names={selectedUserNames} />
+        <Question>{question}</Question>
         <PointBtn onClick={handlePointBtnClick}>
           <img src="/img/POINT_btn.png" alt="" />
         </PointBtn>
