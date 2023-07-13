@@ -5,6 +5,7 @@ import { HintSection } from '../components/Hint/HintSection';
 import userList from "../mock/user-cell.json";
 import { UserBox } from '../components/UserList/UserBox';
 import { UserListSection } from '../components/UserList/UserListSection';
+import { useNavigate } from 'react-router-dom';
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -84,9 +85,11 @@ export const UserPoint = () => {
     setSelectedUserNames(names);
   }, [selectedUsers]);
 
+  const navigate = useNavigate();
   const handlePointBtnClick = () => {
     // 선택된 사용자 정보를 출력
     console.log(selectedUsers);
+    navigate('/point-result', {selectedUsers: selectedUsers});
   };
 
   return (
