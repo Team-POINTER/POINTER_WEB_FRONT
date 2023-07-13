@@ -5,6 +5,8 @@ import { HintSection } from '../components/Hint/HintSection';
 import userList from "../mock/user-cell.json";
 import { UserBox } from '../components/UserList/UserBox';
 import { UserListSection } from '../components/UserList/UserListSection';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -52,9 +54,57 @@ const Notice = styled.p`
   color: #929292;
 `;
 
+const Question = styled.p`
+  color: var(--white, #FFF);
+  text-align: center;
+  /* M 18 */
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+`
+
 export const UserPoint = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectedUserNames, setSelectedUserNames] = useState([]);
+  const [question, setQuestion] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  /*
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}questions/current/1/1`, 
+          {
+            headers: {
+              
+            },
+          }
+        );
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+  */
+  /* mock 데이터 */
+  useEffect(() => {
+    // Update the selected user names whenever selectedUsers changes
+    const names = selectedUsers.map(user => user.userName);
+    setSelectedUserNames(names);
+  }, [selectedUsers]);
+
+  if(loading) {
+    return <h1>로딩중</h1>
+  };
+
 
   const handleUserSelect = (user) => {
     setSelectedUsers((prevSelectedUsers) => {
@@ -66,15 +116,13 @@ export const UserPoint = () => {
     });
   };
 
-  useEffect(() => {
-    // Update the selected user names whenever selectedUsers changes
-    const names = selectedUsers.map(user => user.userName);
-    setSelectedUserNames(names);
-  }, [selectedUsers]);
+  
 
+  
   const handlePointBtnClick = () => {
     // 선택된 사용자 정보를 출력
     console.log(selectedUsers);
+    navigate('/point-result', {selectedUsers: selectedUsers});
   };
 
   return (
@@ -83,6 +131,7 @@ export const UserPoint = () => {
       <Container>
         <HintSection />
         <UserListSection names={selectedUserNames} />
+        <Question>{question}</Question>
         <PointBtn onClick={handlePointBtnClick}>
           <img src="/img/POINT_btn.png" alt="" />
         </PointBtn>
