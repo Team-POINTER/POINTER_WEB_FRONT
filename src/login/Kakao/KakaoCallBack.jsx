@@ -31,6 +31,11 @@ export const KakaoCallBack = () => {
           /* access_token 서버에 전송 */
           axios
             .post(
+              `${process.env.REACT_APP_BASE_URL}auth/login`,
+              {
+                accessToken : access_token
+              }
+              /*
               `https://kapi.kakao.com/v2/user/me`,
               {},
               {
@@ -38,7 +43,8 @@ export const KakaoCallBack = () => {
                   Authorization: `Bearer ${access_token}`,
                   "Content-type": "application/x-www-form-urlencoded;charset=utf-8"
                 },
-              }   
+              } 
+              */  
             )
             .then((res) => {
               console.log("데이터 성공 : ");
