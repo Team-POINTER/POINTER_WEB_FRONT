@@ -3,6 +3,8 @@ import { Header } from '../components/Header/Header';
 import styled from "styled-components";
 import topUser from '../mock/topUser.json';
 import { useNavigate } from 'react-router-dom';
+import { TopUser } from '../components/UserResult/TopUser';
+import { MySelf } from '../components/UserResult/Myself';
 
 const Wrap = styled.div`
   width: 100%;
@@ -24,22 +26,25 @@ const UserResult = styled.section`
 `;
 
 const MyResultBtn = styled.button`
-  color: var(--orangered, #FF2301);
-  text-align: center;
-  background: transparent;
-  /* font-family: Noto Sans KR; */
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
+  display: inline-flex;
   padding: 7px 17px 9px 17px;
   justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 999px;
   border: 2px solid var(--orangered, #FF2301);
+  background: transparent;
+
+  color: var(--orangered, #FF2301);
+  text-align: center;
+
+  /* B 16 */
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
   cursor: pointer;
-  width: 130px;
 `
 
 const Question = styled.p`
@@ -52,92 +57,6 @@ const Question = styled.p`
   font-weight: 500;
   line-height: 150%;
 `
-
-
-const TopUser = ({ index, user, totalVotingNum }) => {
-  const TopUserContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    color: var(--black, #000);
-    /* font-family: Noto Sans KR; */
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 160%;
-  `;
-
-  const UserInfo = styled.div`
-    display: flex;
-    align-items: center;
-  `;
-
-  const VotingInfo = styled.div`
-    display: flex;
-    align-items: center;
-  `;
-
-  const Separator = styled.span`
-    margin: 0 5px;
-  `;
-
-  return (
-    <TopUserContainer>
-      <UserInfo>
-        <span>{index + 1}. {user.name}</span>
-      </UserInfo>
-      <VotingInfo>
-        <span>{user.votingNum}</span>
-        <Separator>/</Separator>
-        <span>{totalVotingNum}</span>
-      </VotingInfo>
-    </TopUserContainer>
-  );
-};
-
-
-const MySelf = ({ user, totalVotingNum }) => {
-  const MySelfContainer = styled.div`
-    margin-top: 53.14px;
-    display: flex;
-    justify-content: space-between;
-    color: var(--black, #000);
-    /* B 18 */
-    /* font-family: Noto Sans KR; */
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 150%;
-  `;
-
-  const UserInfo = styled.div`
-    display: flex;
-    align-items: center;
-  `;
-
-  const VotingInfo = styled.div`
-    display: flex;
-    align-items: center;
-  `;
-
-  const Separator = styled.span`
-    margin: 0 5px;
-  `;
-
-  return (
-    <MySelfContainer>
-      <UserInfo>
-        <span>{user.name}</span>
-      </UserInfo>
-      <VotingInfo>
-        <span>{user.votingNum}</span>
-        <Separator>/</Separator>
-        <span>{totalVotingNum}</span>
-      </VotingInfo>
-    </MySelfContainer>
-  );
-};
-
-
 
 export const PointResult = ({ room }) => {
   const [userList, setUserList] = useState([]);
