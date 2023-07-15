@@ -72,7 +72,7 @@ export const UserPoint = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  /*
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -93,17 +93,19 @@ export const UserPoint = () => {
     };
     fetchData();
   }, []);
-  */
-  /* mock 데이터 */
-  useEffect(() => {
-    // Update the selected user names whenever selectedUsers changes
-    const names = selectedUsers.map(user => user.userName);
-    setSelectedUserNames(names);
-  }, [selectedUsers]);
+  
+
+  /* mock 데이터 */ 
+  // useEffect(() => {
+  //   // Update the selected user names whenever selectedUsers changes
+  //   const names = selectedUsers.map(user => user.userName);
+  //   setSelectedUserNames(names);
+  // }, [selectedUsers]);
 
   if(loading) {
     return <h1>로딩중</h1>
   };
+  
 
 
   const handleUserSelect = (user) => {
