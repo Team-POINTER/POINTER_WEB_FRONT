@@ -31,20 +31,10 @@ export const KakaoCallBack = () => {
           /* access_token 서버에 전송 */
           axios
             .post(
-              `${process.env.REACT_APP_BASE_URL}auth/login`,
+              `${process.env.REACT_APP_BASE_URL}auth/login/web`,
               {
                 accessToken : access_token
               }
-              /*
-              `https://kapi.kakao.com/v2/user/me`,
-              {},
-              {
-                headers: {
-                  Authorization: `Bearer ${access_token}`,
-                  "Content-type": "application/x-www-form-urlencoded;charset=utf-8"
-                },
-              } 
-              */  
             )
             .then((res) => {
               console.log("데이터 성공 : ");
@@ -52,10 +42,15 @@ export const KakaoCallBack = () => {
               /* 유저 정보 받을 시 home으로 이동 */
               navigate("/home");
             })
+            .catch(error => {
+              console.log("error");
+              console.log(error)
+              console.log(process.env.REACT_APP_BASE_URL);
+            })
         } else {
           console.log("access_token 없음");
         }
       });
   },[]);
-  return <>로그인 중...</>
+  return <>로그인 서버 에러...</>
 };
