@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "../components/Header/Header";
 import { RoomBox } from "../components/RoomList/RoomBox";
 import roomList from "../mock/room.json";
 import theme from "../styles/theme";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo } from "../api/auth";
 const Wrap = styled.div`
   margin: 0 auto;
 `;
@@ -38,6 +39,10 @@ const RoomWrap = styled.div`
 `;
 
 export const Home = () => {
+  const { accessToken, userId } = useSelector((state) => state.member);
+
+  // useEffect(getUserInfo(accessToken, userId));
+
   return (
     <Wrap>
       <Header />
