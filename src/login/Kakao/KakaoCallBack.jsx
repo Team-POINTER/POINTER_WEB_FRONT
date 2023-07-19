@@ -1,9 +1,15 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getUserInfo } from "../../api/auth";
+import { setTokenToCookie } from "../../function/cookie";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "../../modules/member";
 
 export const KakaoCallBack = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
@@ -36,6 +42,9 @@ export const KakaoCallBack = () => {
               console.log("데이터 성공 : ");
               console.log(res);
               /* 유저 정보 받을 시 home으로 이동 */
+              dispatch(setAccessToken(res.data.tokenDto.accessToken));
+              setTokenToCookie(res.data.tokenDto.refreshToken);
+              getUserInfo(res.data.tokenDto.userId);
               navigate("/home");
             });
         } else {
