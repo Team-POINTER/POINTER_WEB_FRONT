@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 export const Login = () => {
   /* REST api 방식 */
@@ -9,15 +8,13 @@ export const Login = () => {
   const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}
   `;
-  
-
 
   const navigate = useNavigate();
   const handleClick = () => {
     window.location.href = kakaoURL;
     // const code = new URL(kakaoURL).searchParams.get("code");
     // console.log(code);
-    
+
     // console.log(kakaoURL);
     // // console.log(code);
 
