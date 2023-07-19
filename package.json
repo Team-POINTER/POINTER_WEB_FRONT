@@ -16,7 +16,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.11.1",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "styled-components": "^5.3.11",
@@ -45,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@jridgewell/sourcemap-codec": "^1.4.15"
   }
 }
