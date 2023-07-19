@@ -1,11 +1,27 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getUserInfo } from "../../api/auth";
+import { setTokenToCookie } from "../../function/cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { setAccessToken, setUserId } from "../../modules/member";
+import { AuthService } from "../../service/AuthService";
 
 export const KakaoCallBack = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
+  const { accessToken, userId } = useSelector((state) => state.member);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (accessToken && userId) {
+      dispatch(AuthService.getUserInfo(userId)).then((response) =>
+        console.log(JSON.stringify(response))
+      );
+    }
+  }, [accessToken]);
+
+  useEffect(() => {
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
     const grant_type = "authorization_code";
@@ -18,7 +34,7 @@ export const KakaoCallBack = () => {
         {},
         {
           headers: {
-            "Content-Type":"application/x-www-form-urlencoded;charset=utf-8",
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
           },
         }
       )
@@ -26,31 +42,27 @@ export const KakaoCallBack = () => {
         console.log(res);
         const { data } = res;
         const { access_token, refresh_token } = data;
-        if(access_token) {
+        if (access_token) {
           console.log(`Bearer ${access_token}`);
           /* access_token 서버에 전송 */
           axios
-            .post(
-              `${process.env.REACT_APP_BASE_URL}auth/login/web`,
-              {
-                accessToken : access_token
-              }
-            )
+            .post(`${process.env.REACT_APP_BASE_URL}auth/login/web`, {
+              accessToken: access_token,
+            })
             .then((res) => {
               console.log("데이터 성공 : ");
               console.log(res);
               /* 유저 정보 받을 시 home으로 이동 */
+              dispatch(setAccessToken(res.data.tokenDto.accessToken));
+              dispatch(setUserId(res.data.tokenDto.userId));
+              setTokenToCookie(res.data.tokenDto.refreshToken);
+
               navigate("/home");
-            })
-            .catch(error => {
-              console.log("error");
-              console.log(error)
-              console.log(process.env.REACT_APP_BASE_URL);
-            })
+            });
         } else {
           console.log("access_token 없음");
         }
       });
-  },[]);
-  return <>로그인 서버 에러...</>
+  }, []);
+  return <>로그인 중...</>;
 };

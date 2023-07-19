@@ -18,10 +18,7 @@ function App() {
         <Routes>
           <Route path="/">
             <Route path="/" element={<Login />} />
-            <Route
-              path="/auth/kakao/callback"
-              element={<KakaoCallBack />}
-            />
+            <Route path="/auth/kakao/callback" element={<KakaoCallBack />} />
           </Route>
           <Route path="home" element={<Home />} />
           <Route path="home/user-point" element={<UserPoint />} />
