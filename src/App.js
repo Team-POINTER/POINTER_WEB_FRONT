@@ -10,6 +10,7 @@ import { PointResult } from "./pages/PointResult";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./login/Login";
 import { KakaoCallBack } from "./login/Kakao/KakaoCallBack";
+import { SettingPage } from "./pages/SettingPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="result" element={<QuestionResult />} />
           <Route path="question" element={<CreateQuestion />} />
           <Route path="point-result" element={<PointResult />} />
+          <Route path="setting" element={<SettingPage />} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </Router>
