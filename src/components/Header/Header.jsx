@@ -35,7 +35,9 @@ export const Header = (props) => {
           <button className={styles.room}>룸 만들기</button>
         ))
       }
-        <button className={styles.user}>포인터 님</button>
+        <Link to='/setting'>
+          <button className={styles.user} >포인터 님</button>
+        </Link>
       </nav>
     </header>
   );
