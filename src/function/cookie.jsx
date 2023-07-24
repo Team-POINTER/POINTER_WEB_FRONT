@@ -12,7 +12,7 @@ export const getCookie = (name) => {
 
 export const removeTokenCookie = () => {
   cookies.remove(
-    "token",
+    "refreshToken",
     {
       path: "/",
       domain: process.env.NODE_ENV === "production" ? ".@@@.com" : "localhost",
