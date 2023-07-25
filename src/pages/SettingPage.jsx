@@ -50,7 +50,7 @@ const Line = styled.div`
 export const SettingPage = () => {
   return (
     <>
-      <Header isRoomMake={false}/>
+      <Header/>
       <Wrap>
         <Nickname>포인터 님</Nickname>
         <Table><img src="/img/Moon.png" alt="Moon"/> <p>모드 변경</p></Table>
