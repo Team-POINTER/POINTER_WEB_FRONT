@@ -22,7 +22,7 @@ function App() {
             <Route path="/auth/kakao/callback" element={<KakaoCallBack />} />
           </Route>
           <Route path="home" element={<Home />} />
-          <Route path="home/user-point" element={<UserPoint />} />
+          <Route path="user-point" element={<UserPoint />} />
           <Route path="result" element={<QuestionResult />} />
           <Route path="question" element={<CreateQuestion />} />
           <Route path="point-result" element={<PointResult />} />
