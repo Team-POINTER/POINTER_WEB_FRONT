@@ -140,7 +140,7 @@ export const PointResult = ({ room }) => {
 
   return (
     <Wrap>
-      <Header isRoomMake={false}/>
+      <Header/>
       <Question>{question}</Question>
       <Buttons>
         <RegisterBtn>질문 등록하기<span>22:22:11</span></RegisterBtn>

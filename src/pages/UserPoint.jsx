@@ -129,7 +129,7 @@ export const UserPoint = () => {
 
   return (
     <Wrap>
-      <Header isRoomMake={false}/>
+      <Header/>
       <Container>
         <HintSection />
         <UserListSection names={selectedUserNames} />

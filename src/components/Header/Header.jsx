@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import styles from "./Header.module.css";
-import { Link } from "react-router-dom";
+import { Link, Router, useLocation } from "react-router-dom";
 
-export const Header = (props) => {
+export const Header = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const router = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +28,7 @@ export const Header = (props) => {
       </Link>
       <div className={styles.empty}></div>
       <nav className={styles.nav}>
-      {props.isRoomMake &&
+      {(router.pathname.indexOf('/home') == 0) &&
         (windowWidth <= 820 ? (
           // <button className={styles.addButton}><img className={styles.plusImg} src="./img/x.png" alt="+버튼" /></button>
           <button className={styles.addButton}>+</button>
