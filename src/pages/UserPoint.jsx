@@ -7,6 +7,7 @@ import { UserBox } from '../components/UserList/UserBox';
 import { UserListSection } from '../components/UserList/UserListSection';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getCookie } from '../function/cookie';
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -81,10 +82,11 @@ export const UserPoint = () => {
           `${process.env.REACT_APP_BASE_URL}questions/current/1/1`, 
           {
             headers: {
-              
+              Authorization: `Bearer ${getCookie("accessToken")}`,
             },
           }
         );
+        console.log(getCookie("accessToken"));
         console.log(response);
       } catch (e) {
         console.log(e);
