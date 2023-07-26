@@ -21,13 +21,8 @@ export const removeTokenCookie = () => {
   );
 };
 
-export const setTokenToCookie = (refresh, access) => {
+export const setTokenToCookie = (refresh) => {
   setCookie("refreshToken", refresh, {
-    path: "/",
-    maxAge: 14 * 24 * 60 * 60,
-    domain: process.env.NODE_ENV === "production" ? ".@@@.com" : "localhost",
-  });
-  setCookie("accessToken", access, {
     path: "/",
     maxAge: 14 * 24 * 60 * 60,
     domain: process.env.NODE_ENV === "production" ? ".@@@.com" : "localhost",

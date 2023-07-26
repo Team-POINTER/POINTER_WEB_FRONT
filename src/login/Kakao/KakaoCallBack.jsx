@@ -55,7 +55,7 @@ export const KakaoCallBack = () => {
               /* 유저 정보 받을 시 home으로 이동 */
               dispatch(setAccessToken(res.data.tokenDto.accessToken));
               dispatch(setUserId(res.data.tokenDto.userId));
-              setTokenToCookie(res.data.tokenDto.refreshToken, res.data.tokenDto.accessToken);
+              setTokenToCookie(res.data.tokenDto.refreshToken);
               console.log(getCookie("accessToken"));
               navigate("/home");
             });
