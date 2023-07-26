@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Header } from '../components/Header/Header';
 import styled from "styled-components";
 import topUser from '../mock/topUser.json';
 import { useNavigate } from 'react-router-dom';
 import { TopUser } from '../components/UserResult/TopUser';
 import { MySelf } from '../components/UserResult/Myself';
-
-const Wrap = styled.div`
-  width: 100%;
-  margin: 0 auto;
-`;
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { getCookie } from '../function/cookie';
 
 const UserResult = styled.section`
   width: 759px;
@@ -124,12 +123,28 @@ export const PointResult = ({ room }) => {
   const [userList, setUserList] = useState([]);
   const [totalVotingNum, setTotalVotingNum] = useState(0);
   const [question, setQuestion] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const topUserData = topUser[0];
-    setUserList(topUserData.memberList);
-    setTotalVotingNum(topUserData.totalVotingNum);
-    setQuestion(topUserData.questionName);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}votes/1`, 
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("accessToken")}`,
+            },
+          }
+        );
+        console.log(getCookie("accessToken"));
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      }
+      setLoading(false);
+    };
+    fetchData();
   }, []);
 
 
@@ -139,7 +154,7 @@ export const PointResult = ({ room }) => {
   };
 
   return (
-    <Wrap>
+    <Fragment>
       <Header/>
       <Question>{question}</Question>
       <Buttons>
@@ -148,19 +163,19 @@ export const PointResult = ({ room }) => {
       </Buttons>
       <UserResult>
         {userList.map((user, index) => (
-          <div key={user.userId}>
+          <Fragment key={user.userId}>
             {index < userList.length - 1 ? (
               <TopUser index={index} user={user} totalVotingNum={totalVotingNum} />
             ) : (
               <MySelf user={user} totalVotingNum={totalVotingNum} />
             )}
-          </div>
+          </Fragment>
         ))}
         
         <MyResultBtn onClick={handleClick}>나의 결과 보기</MyResultBtn>
       </UserResult>
       
-    </Wrap>
+    </Fragment>
   );
 };
 
