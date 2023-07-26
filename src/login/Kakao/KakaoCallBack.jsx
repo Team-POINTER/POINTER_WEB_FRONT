@@ -46,7 +46,7 @@ export const KakaoCallBack = () => {
           console.log(`Bearer ${access_token}`);
           /* access_token 서버에 전송 */
           axios
-            .post(`${process.env.REACT_APP_BASE_URL}auth/login/web`, {
+            .post(`${process.env.REACT_APP_BASE_URL}/auth/login/web`, {
               accessToken: access_token,
             })
             .then((res) => {
@@ -55,7 +55,7 @@ export const KakaoCallBack = () => {
               /* 유저 정보 받을 시 home으로 이동 */
               dispatch(setAccessToken(res.data.tokenDto.accessToken));
               dispatch(setUserId(res.data.tokenDto.userId));
-              setTokenToCookie(res.data.tokenDto.refreshToken, res.data.tokenDto.accessToken);
+              setTokenToCookie(res.data.tokenDto.refreshToken);
               console.log(getCookie("accessToken"));
               navigate("/home");
             });
