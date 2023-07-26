@@ -46,7 +46,7 @@ export const KakaoCallBack = () => {
           console.log(`Bearer ${access_token}`);
           /* access_token 서버에 전송 */
           axios
-            .post(`${process.env.REACT_APP_BASE_URL}auth/login/web`, {
+            .post(`${process.env.REACT_APP_BASE_URL}/auth/login/web`, {
               accessToken: access_token,
             })
             .then((res) => {
