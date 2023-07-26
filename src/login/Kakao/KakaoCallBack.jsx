@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserInfo } from "../../api/auth";
-import { setTokenToCookie } from "../../function/cookie";
+import { getCookie, setTokenToCookie } from "../../function/cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken, setUserId } from "../../modules/member";
 import { AuthService } from "../../service/AuthService";
@@ -55,8 +55,8 @@ export const KakaoCallBack = () => {
               /* 유저 정보 받을 시 home으로 이동 */
               dispatch(setAccessToken(res.data.tokenDto.accessToken));
               dispatch(setUserId(res.data.tokenDto.userId));
-              setTokenToCookie(res.data.tokenDto.refreshToken);
-
+              setTokenToCookie(res.data.tokenDto.refreshToken, res.data.tokenDto.accessToken);
+              console.log(getCookie("accessToken"));
               navigate("/home");
             });
         } else {
