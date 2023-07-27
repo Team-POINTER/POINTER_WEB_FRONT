@@ -1,10 +1,22 @@
 import axios from "axios";
-import { getCookie } from "../function/cookie";
+import { getCookie, setTokenToCookie } from "../function/cookie";
 
-export const getUserInfo = (userId) => {
-  return axios.get(`${process.env.REACT_APP_BASE_URL}/users/${userId}/info`, {
-    headers: {
-      Authorization: "Bearer " + getCookie("refreshToken"),
-    },
-  });
+export const getUserInfo = () => {
+  return axios
+    .post(`${process.env.REACT_APP_BASE_URL}/user/reissue`, 
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + getCookie("refreshToken"),
+        },
+      }
+    )
+    .then(res => {
+      console.log(res.data);
+      setTokenToCookie(res.data.tokenDto.refreshToken);
+      return res.data.tokenDto;
+    })
+    .catch(e => {
+      console.log('err: ' + e);
+    });
 };
