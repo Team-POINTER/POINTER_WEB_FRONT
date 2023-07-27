@@ -27,16 +27,16 @@ const Separator = styled.span`
 `;
 
 
-export const TopUser = ({ index, user, totalVotingNum }) => {
+export const TopUser = ({ index, user }) => {
   return (
     <TopUserContainer>
       <UserInfo>
-        <span>{index + 1}. {user.name}</span>
+        <span>{index + 1}. {user.userName}</span>
       </UserInfo>
       <VotingInfo>
-        <span>{user.votingNum}</span>
+        <span>{user.votedMemberCnt}</span>
         <Separator>/</Separator>
-        <span>{totalVotingNum}</span>
+        <span>{user.allVoteCnt}</span>
       </VotingInfo>
     </TopUserContainer>
   );
