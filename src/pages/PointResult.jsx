@@ -121,6 +121,8 @@ const Buttons = styled.div`
 `;
 
 export const PointResult = ({ room }) => {
+  const [members, setMembers] = useState([]);
+  const [targetUser, setTargetUser] = useState('');
   const [userList, setUserList] = useState([]);
   const [totalVotingNum, setTotalVotingNum] = useState(0);
   const [question, setQuestion] = useState('');
@@ -143,6 +145,9 @@ export const PointResult = ({ room }) => {
             },
           }
         );
+        setMembers(response.data.result.members);
+        setTargetUser(response.data.result.targetUser);
+        // console.log(response.data.result.members);
         console.log(response);
       } catch (e) {
         console.log(e);
@@ -167,15 +172,13 @@ export const PointResult = ({ room }) => {
         <LinkCopy>링크로 초대</LinkCopy>
       </Buttons>
       <UserResult>
-        {userList.map((user, index) => (
-          <Fragment key={user.userId}>
-            {index < userList.length - 1 ? (
-              <TopUser index={index} user={user} totalVotingNum={totalVotingNum} />
-            ) : (
-              <MySelf user={user} totalVotingNum={totalVotingNum} />
-            )}
-          </Fragment>
-        ))}
+        {
+          members.map((user, index) => (
+            <TopUser key={user.userId} index={index} user={user} />
+          ))
+        }
+        {targetUser!=='' && <MySelf user={targetUser} />}
+       
         
         <MyResultBtn onClick={handleClick}>나의 결과 보기</MyResultBtn>
       </UserResult>
