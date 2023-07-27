@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const MySelf = ({ user  }) => {
   const MySelfContainer = styled.div`
-    margin-top: 53.14px;
     display: flex;
+    flex-shrink: 0;
     justify-content: space-between;
     color: var(--black, #000);
     /* B 18 */
