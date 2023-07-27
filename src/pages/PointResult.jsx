@@ -23,6 +23,16 @@ const UserResult = styled.section`
   /* display: flex;
   flex-direction: column;  */
   /* align-items: center; */
+  position: relative; /* 추가: UserResult를 바닥 기준으로 정렬하기 위해 */
+
+`;
+
+const Bottom = styled.div`
+  width: 759px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 0;
 `;
 
 const MyResultBtn = styled.button`
@@ -177,10 +187,10 @@ export const PointResult = ({ room }) => {
             <TopUser key={user.userId} index={index} user={user} />
           ))
         }
-        {targetUser!=='' && <MySelf user={targetUser} />}
-       
-        
-        <MyResultBtn onClick={handleClick}>나의 결과 보기</MyResultBtn>
+        <Bottom>
+          {targetUser!=='' && <MySelf user={targetUser} />}
+          <MyResultBtn onClick={handleClick}>나의 결과 보기</MyResultBtn>
+        </Bottom>
       </UserResult>
       
     </Fragment>
