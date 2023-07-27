@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { getCookie } from '../function/cookie';
+import { getUserInfo } from '../api/auth';
 
 const UserResult = styled.section`
   width: 759px;
@@ -125,19 +126,23 @@ export const PointResult = ({ room }) => {
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
 
+
+
   useEffect(() => {
+
     const fetchData = async () => {
       setLoading(true);
       try {
+        const user = await getUserInfo();
+
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}votes/1`, 
+          `${process.env.REACT_APP_BASE_URL}/votes/1`, 
           {
             headers: {
-              Authorization: `Bearer ${getCookie("accessToken")}`,
+              Authorization: `Bearer ${user.accessToken}`,
             },
           }
         );
-        console.log(getCookie("accessToken"));
         console.log(response);
       } catch (e) {
         console.log(e);
