@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
-export const MySelf = ({ user, totalVotingNum }) => {
+export const MySelf = ({ user  }) => {
   const MySelfContainer = styled.div`
     margin-top: 53.14px;
     display: flex;
@@ -32,12 +32,12 @@ export const MySelf = ({ user, totalVotingNum }) => {
   return (
     <MySelfContainer>
       <UserInfo>
-        <span>{user.name}</span>
+        <span>{user.userName}</span>
       </UserInfo>
       <VotingInfo>
-        <span>{user.votingNum}</span>
+        <span>{user.votedMemberCnt}</span>
         <Separator>/</Separator>
-        <span>{totalVotingNum}</span>
+        <span>{user.allVoteCnt}</span>
       </VotingInfo>
     </MySelfContainer>
   );
