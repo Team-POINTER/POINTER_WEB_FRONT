@@ -157,6 +157,7 @@ export const PointResult = ({ room }) => {
         );
         setMembers(response.data.result.members);
         setTargetUser(response.data.result.targetUser);
+        setQuestion(response.data.result.question);
         // console.log(response.data.result.members);
         console.log(response);
       } catch (e) {
@@ -178,7 +179,7 @@ export const PointResult = ({ room }) => {
       <Header/>
       <Question>{question}</Question>
       <Buttons>
-        <RegisterBtn>질문 등록하기<span>22:22:11</span></RegisterBtn>
+        <RegisterBtn>질문 등록하기</RegisterBtn>
         <LinkCopy>링크로 초대</LinkCopy>
       </Buttons>
       <UserResult>
