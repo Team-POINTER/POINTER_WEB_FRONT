@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCookie } from "../function/cookie";
+import { getCookie, setTokenToCookie } from "../function/cookie";
 
 const refreshToken = getCookie("refreshToken");
 
@@ -11,7 +11,27 @@ export const kakaoLogin = (dto) => {
 export const getUserInfo = () => {
   return axios.get(`${process.env.REACT_APP_BASE_URL}/users/info`, {
     headers: {
-      Authorization: `Bearer Token ${refreshToken}`,
+      Authorization: `Bearer ${refreshToken}`,
     },
   });
+};
+
+export const getAccessToken = () => {
+  return axios
+    .post(`${process.env.REACT_APP_BASE_URL}/user/reissue`, 
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + getCookie("refreshToken"),
+        },
+      }
+    )
+    .then(res => {
+      console.log(res.data);
+      setTokenToCookie(res.data.tokenDto.refreshToken);
+      return res.data.tokenDto;
+    })
+    .catch(e => {
+      console.log('err: ' + e);
+    });
 };
