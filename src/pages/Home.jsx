@@ -6,6 +6,8 @@ import roomList from "../mock/room.json";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "../api/auth";
+import { AuthService } from "../service/AuthService";
+import { RoomService } from "../service/RoomService";
 const Wrap = styled.div`
   margin: 0 auto;
 `;
@@ -40,8 +42,15 @@ const RoomWrap = styled.div`
 
 export const Home = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
-
-  // useEffect(getUserInfo(accessToken, userId));
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(AuthService.getUserInfo()).then((res) => {
+      console.log(res.payload.data);
+    });
+    dispatch(RoomService.getRoomList()).then((res) => {
+      console.log(res.payload.data);
+    });
+  }, []);
 
   return (
     <Wrap>
@@ -50,7 +59,7 @@ export const Home = () => {
         <RoomWrap>
           <RoomContainer row={roomList.length}>
             {roomList.reverse().map((room, index) => (
-              <RoomBox roomData={room}></RoomBox>
+              <RoomBox roomData={room} key={index}></RoomBox>
             ))}
           </RoomContainer>
         </RoomWrap>
