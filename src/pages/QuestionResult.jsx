@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Header } from "../components/Header/Header";
 import data from "../mock/questionResult.json";
 import theme from "../styles/theme";
 
@@ -96,6 +97,7 @@ const BottomRight = styled.div`
 export const QuestionResult = () => {
   return (
     <Wrap>
+      <Header />
       <Question>{data[0].questionName}</Question>
       <Container>
         <InnerContainer>
