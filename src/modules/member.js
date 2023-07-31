@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setTokenToCookie } from "../function/cookie";
+import { AuthService } from "../service/AuthService";
 
 const initialState = {
   accessToken: null,
@@ -16,7 +18,14 @@ export const memberSlice = createSlice({
       state.accessToken = action.payload;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(AuthService.kakaoLogin.fulfilled, (state, action) => {
+      const response = action.payload.data.tokenDto;
+      setTokenToCookie(response.refreshToken);
+      state.accessToken = response.accessToken;
+      state.userId = response.userId;
+    });
+  },
 });
 
 export const { setAccessToken, setUserId } = memberSlice.actions;

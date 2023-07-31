@@ -1,15 +1,17 @@
 import axios from "axios";
-import { getCookie, setTokenToCookie } from "../function/cookie";
+import { getCookie } from "../function/cookie";
+
+const refreshToken = "Bearer Token " + getCookie("refreshToken");
 
 export const kakaoLogin = (dto) => {
   console.log("카카오 로그인 시도: 보낸 dto" + JSON.stringify(dto));
-  return axios.post(`${process.env.REACT_APP_BASE_URL}auth/login/web`, dto);
+  return axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login/web`, dto);
 };
 
 export const getUserInfo = () => {
-  return axios.get(`${process.env.REACT_APP_BASE_URL}users/info`, {
+  return axios.get(`${process.env.REACT_APP_BASE_URL}/users/info`, {
     headers: {
-      Authorization: "Bearer Token " + getCookie("refreshToken"),
+      Authorization: refreshToken,
     },
   });
 };
