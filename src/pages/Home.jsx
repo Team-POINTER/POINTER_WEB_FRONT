@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "../api/auth";
 import { AuthService } from "../service/AuthService";
 import { RoomService } from "../service/RoomService";
+import { getCookie } from "../function/cookie";
 const Wrap = styled.div`
   margin: 0 auto;
 `;
@@ -42,14 +43,22 @@ const RoomWrap = styled.div`
 
 export const Home = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
+  const refreshToken = getCookie("refreshToken");
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(AuthService.getUserInfo()).then((res) => {
-      console.log(res.payload.data);
-    });
-    dispatch(RoomService.getRoomList()).then((res) => {
-      console.log(res.payload.data);
-    });
+    if (
+      refreshToken != null &&
+      refreshToken != "undefined" &&
+      refreshToken != undefined
+    ) {
+      dispatch(AuthService.getUserInfo()).then((res) => {
+        console.log(res);
+      });
+      // dispatch(RoomService.getRoomList()).then((res) => {
+      //   console.log(res.payload.data);
+      // });
+    }
   }, []);
 
   return (
