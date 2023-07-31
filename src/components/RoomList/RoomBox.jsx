@@ -110,31 +110,33 @@ const EditBox = styled.div`
 `;
 
 const EditContainer = styled.div`
-  width: 307px;
-  height: 179px;
-  background: #ffffff;
+  width: 347px;
+  height: 162px;
+  background: #e8e9f3cc;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 25px;
-  padding: 20px;
+  border-radius: 15px;
+  position: relative;
+  padding: 40px 0px 20px 0px;
+  margin-bottom: 10px;
 `;
 
 const EditDiv = styled.div`
-  width: 307px;
-  height: 50px;
-  background: #ffffff;
-  border-radius: 25px;
-  color: ${theme.colors.gray70};
+  width: 347px;
+  height: 60px;
+  color: #121212;
   display: flex;
   justify-content: center;
   align-items: center;
   ${theme.M_18};
   cursor: pointer;
+  border-top: 1px solid ${theme.colors.grayscale_60};
 `;
 
 const EditClose = styled(EditDiv)`
   width: 347px;
   margin-top: 4px;
   height: 70px;
+  border-radius: 15px;
 `;
 
 const EditRoomNameBox = styled.div`
@@ -234,6 +236,15 @@ export const RoomBox = ({ roomData }) => {
     navigate("/result");
   };
 
+  const shortenTitle = (title) => {
+    let shortTitle = title;
+    if (title.length > 8) {
+      shortTitle = title.substr(0, 6) + "...";
+    }
+
+    return shortTitle;
+  };
+
   return (
     <>
       <Wrap>
@@ -273,17 +284,43 @@ export const RoomBox = ({ roomData }) => {
           <EditWrap>
             <EditBox>
               <EditContainer>
-                <EditDiv onClick={() => openRoomNameUpdate(roomData)}>
-                  {"'" + roomData.title + "'의 이름 편집"}
+                <EditDiv
+                  style={{
+                    height: "40px",
+                    position: "absolute",
+                    top: "0px",
+                    fontSize: "14px",
+                    color: theme.colors.grayscale_60,
+                    border: "0px",
+                  }}
+                >
+                  {"룸 '" + shortenTitle(roomData.title) + "'에 대해"}
                 </EditDiv>
-                <hr />
-                <EditDiv>{"'" + roomData.title + "'에 링크로 초대"}</EditDiv>
-                <hr />
-                <EditDiv style={{ color: theme.colors.orangered }}>
-                  {"룸 " + roomData.roomId + " 나가기"}
+
+                <EditDiv onClick={() => openRoomNameUpdate(roomData)}>
+                  {"룸 이름 편집하기"}
+                </EditDiv>
+
+                <EditDiv>{"친구 초대하기"}</EditDiv>
+
+                <EditDiv
+                  style={{
+                    color: theme.colors.orangered,
+                  }}
+                >
+                  {"룸 나가기"}
                 </EditDiv>
               </EditContainer>
-              <EditClose onClick={handleClose}>{"취소"}</EditClose>
+
+              <EditClose
+                style={{
+                  background: "#e8e9f3cc",
+                  color: theme.colors.grayscale_60,
+                }}
+                onClick={handleClose}
+              >
+                {"취소"}
+              </EditClose>
             </EditBox>
             {editNameOpen && (
               <EditRoomName
