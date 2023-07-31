@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCookie } from "../function/cookie";
 
-const refreshToken = "Bearer Token " + getCookie("refreshToken");
+const refreshToken = getCookie("refreshToken");
 
 export const kakaoLogin = (dto) => {
   console.log("카카오 로그인 시도: 보낸 dto" + JSON.stringify(dto));
@@ -11,7 +11,7 @@ export const kakaoLogin = (dto) => {
 export const getUserInfo = () => {
   return axios.get(`${process.env.REACT_APP_BASE_URL}/users/info`, {
     headers: {
-      Authorization: refreshToken,
+      Authorization: `Bearer Token ${refreshToken}`,
     },
   });
 };
