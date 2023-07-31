@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { json, useNavigate } from "react-router-dom";
 import { getUserInfo } from "../../api/auth";
 import { getCookie, setTokenToCookie } from "../../function/cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,17 +9,26 @@ import { AuthService } from "../../service/AuthService";
 
 export const KakaoCallBack = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
+  const [token, setToken] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (accessToken && userId) {
-      dispatch(AuthService.getUserInfo(userId)).then((response) =>
-        console.log(JSON.stringify(response))
-      );
-    }
+    if (accessToken) navigate("/home");
   }, [accessToken]);
+
+  useEffect(() => {
+    if (token) {
+      console.log(`Bearer ${token}`);
+      /* access_token 서버에 전송 */
+      const dto = { accessToken: token };
+      dispatch(AuthService.kakaoLogin(dto)).then((res) => {
+        console.log("데이터 성공 : " + JSON.stringify(res));
+        setToken(null);
+      });
+    }
+  }, [token]);
 
   useEffect(() => {
     const params = new URL(document.location.toString()).searchParams;
@@ -43,22 +52,7 @@ export const KakaoCallBack = () => {
         const { data } = res;
         const { access_token, refresh_token } = data;
         if (access_token) {
-          console.log(`Bearer ${access_token}`);
-          /* access_token 서버에 전송 */
-          axios
-            .post(`${process.env.REACT_APP_BASE_URL}/auth/login/web`, {
-              accessToken: access_token,
-            })
-            .then((res) => {
-              console.log("데이터 성공 : ");
-              console.log(res);
-              /* 유저 정보 받을 시 home으로 이동 */
-              dispatch(setAccessToken(res.data.tokenDto.accessToken));
-              dispatch(setUserId(res.data.tokenDto.userId));
-              setTokenToCookie(res.data.tokenDto.refreshToken);
-              console.log(getCookie("accessToken"));
-              navigate("/home");
-            });
+          setToken(access_token);
         } else {
           console.log("access_token 없음");
         }
