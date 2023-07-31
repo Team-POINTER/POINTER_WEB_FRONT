@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { getCookie } from '../function/cookie';
-import { getUserInfo } from '../api/auth';
+import { getAccessToken, getUserInfo } from '../api/auth';
 import QuestRegistBtn from '../UI/QuestionRegistrationBtn/QuestRegistBtn';
 
 const UserResult = styled.section`
@@ -123,8 +123,8 @@ export const PointResult = ({ room }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const user = await getUserInfo();
-
+        const user = await getAccessToken();
+        console.log(user);
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/votes/1`, 
           {
@@ -133,11 +133,12 @@ export const PointResult = ({ room }) => {
             },
           }
         );
+        console.log(response);
         setMembers(response.data.result.members);
         setTargetUser(response.data.result.targetUser);
         setQuestion(response.data.result.question);
         // console.log(response.data.result.members);
-        console.log(response);
+        
       } catch (e) {
         console.log(e);
       }
@@ -175,4 +176,3 @@ export const PointResult = ({ room }) => {
     </Fragment>
   );
 };
-
