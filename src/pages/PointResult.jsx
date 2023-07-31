@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { getCookie } from '../function/cookie';
 import { getUserInfo } from '../api/auth';
+import QuestRegistBtn from '../UI/QuestionRegistrationBtn/QuestRegistBtn';
 
 const UserResult = styled.section`
   width: 759px;
@@ -69,30 +70,7 @@ const Question = styled.p`
   padding: 93px;
 `
 
-const RegisterBtn = styled.div`
-  display: inline-flex;
-  padding: 7px 17px 9px 17px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  background: var(--orangered, #ff2301);
-  color: #fff;
-  text-align: center;
 
-  /* B 16 */
-  font-size: 16px;
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
-
-  span {
-    /* R 16 */
-    font-weight: 400;
-    line-height: 170%;
-  }
-`;
 
 const LinkCopy = styled.div`
   display: inline-flex;
@@ -179,7 +157,7 @@ export const PointResult = ({ room }) => {
       <Header/>
       <Question>{question}</Question>
       <Buttons>
-        <RegisterBtn>질문 등록하기</RegisterBtn>
+        <QuestRegistBtn/>
         <LinkCopy>링크로 초대</LinkCopy>
       </Buttons>
       <UserResult>
