@@ -236,6 +236,10 @@ export const RoomBox = ({ roomData }) => {
     navigate("/result");
   };
 
+  const moveToRoom = () => {
+    navigate("/user-point", { state: { roomData } });
+  };
+
   const shortenTitle = (title) => {
     let shortTitle = title;
     if (title.length > 8) {
@@ -248,7 +252,7 @@ export const RoomBox = ({ roomData }) => {
   return (
     <>
       <Wrap>
-        <Upper>
+        <Upper onClick={moveToRoom} style={{ cursor: "pointer" }}>
           <Title>{roomData.title}</Title>
           <Question>{roomData.recentQuestion}</Question>
         </Upper>

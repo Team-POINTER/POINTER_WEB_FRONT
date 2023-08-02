@@ -18,7 +18,8 @@ export const getUserInfo = () => {
 
 export const getAccessToken = () => {
   return axios
-    .post(`${process.env.REACT_APP_BASE_URL}/user/reissue`, 
+    .post(
+      `${process.env.REACT_APP_BASE_URL}/user/reissue`,
       {},
       {
         headers: {
@@ -26,12 +27,8 @@ export const getAccessToken = () => {
         },
       }
     )
-    .then(res => {
-      console.log(res.data);
+    .then((res) => {
       setTokenToCookie(res.data.tokenDto.refreshToken);
       return res.data.tokenDto;
-    })
-    .catch(e => {
-      console.log('err: ' + e);
     });
 };
