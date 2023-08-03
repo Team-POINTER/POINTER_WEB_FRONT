@@ -12,7 +12,7 @@ const SectionContainer = styled.div`
 
 const UserList = styled.ul`
   display: flex;
-  flex-decoration: colum;
+  flex-direction: column;
   list-style-type: none;
   padding: 0;
   margin: 8px 0;
@@ -24,6 +24,7 @@ const UserName = styled.li`
   color: white;
   flex-shrink: 0;
 `;
+
 
 export const UserListSection = ({ names }) => {
   return (

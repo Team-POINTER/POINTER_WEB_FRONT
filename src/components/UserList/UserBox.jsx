@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './UserBox.module.css';
 import Icon from "../../icon/Icon";
 
-export const UserBox = ({ userData, handleUserSelect }) => {
+export const UserBox = ({ userData, handleUserSelect, isSelected }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -13,7 +13,7 @@ export const UserBox = ({ userData, handleUserSelect }) => {
   return (
     <li className={styles.userBox}>
       <div className={styles.textContainer} onClick={handleClick}>
-        {userData.userName}
+        {userData.name}({userData.id})
         <div className={styles.empty}></div>
         {isClicked && <Icon icon="writerMark" color="red" />}
       </div>

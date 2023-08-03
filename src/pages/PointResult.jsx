@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Header } from '../components/Header/Header';
 import styled from "styled-components";
 import topUser from '../mock/topUser.json';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { TopUser } from '../components/UserResult/TopUser';
 import { MySelf } from '../components/UserResult/Myself';
 import { v4 as uuidv4 } from 'uuid';
@@ -116,7 +116,8 @@ export const PointResult = ({ room }) => {
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
 
-
+  const {state} = useLocation();
+  const {roomData} = state;
 
   useEffect(() => {
 
@@ -124,9 +125,8 @@ export const PointResult = ({ room }) => {
       setLoading(true);
       try {
         const user = await getAccessToken();
-        console.log(user);
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/votes/1`, 
+          `${process.env.REACT_APP_BASE_URL}/votes/${roomData.roomId}`, 
           {
             headers: {
               Authorization: `Bearer ${user.accessToken}`,
