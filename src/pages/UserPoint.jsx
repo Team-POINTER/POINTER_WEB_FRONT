@@ -5,7 +5,7 @@ import { HintSection } from '../components/Hint/HintSection';
 import userList from "../mock/user-cell.json";
 import { UserBox } from '../components/UserList/UserBox';
 import { UserListSection } from '../components/UserList/UserListSection';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getCookie } from '../function/cookie';
 
@@ -72,29 +72,33 @@ export const UserPoint = () => {
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const location = useLocation();
   const navigate = useNavigate();
   
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}questions/current/1/1`, 
-          {
-            headers: {
-              Authorization: `Bearer ${getCookie("accessToken")}`,
-            },
-          }
-        );
-        console.log(getCookie("accessToken"));
-        console.log(response);
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+  const roomData = location.state.roomData;
+  console.log(roomData);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}questions/current/1/1`, 
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${getCookie("accessToken")}`,
+  //           },
+  //         }
+  //       );
+  //       console.log(getCookie("accessToken"));
+  //       console.log(response);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchData();
+  // }, []);
   
 
   /* mock 데이터 */ 

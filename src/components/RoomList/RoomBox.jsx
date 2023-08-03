@@ -43,7 +43,9 @@ const Question = styled.div`
   margin-bottom: 25px;
 `;
 
-const Upper = styled.div``;
+const Upper = styled.div`
+  cursor: pointer;
+`;
 
 const Bottom = styled.div`
   display: flex;
@@ -236,6 +238,10 @@ export const RoomBox = ({ roomData }) => {
     navigate("/result");
   };
 
+  const moveToRoom = () => {
+    navigate("/user-point", { state: { roomData }});
+  };
+
   const shortenTitle = (title) => {
     let shortTitle = title;
     if (title.length > 8) {
@@ -248,7 +254,7 @@ export const RoomBox = ({ roomData }) => {
   return (
     <>
       <Wrap>
-        <Upper>
+        <Upper onClick={moveToRoom}>
           <Title>{roomData.title}</Title>
           <Question>{roomData.recentQuestion}</Question>
         </Upper>
