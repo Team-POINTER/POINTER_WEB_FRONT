@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "../components/Header/Header";
 import { RoomBox } from "../components/RoomList/RoomBox";
-import roomList from "../mock/room.json";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "../api/auth";
@@ -44,17 +43,15 @@ const RoomWrap = styled.div`
 
 export const Home = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
+  const { roomList } = useSelector((state) => state.room);
   const dispatch = useDispatch();
-  const [roomList, setRoomList] = useState([]);
   const [keyword, setKeyword] = useState("");
   const refreshToken = getCookie("refreshToken");
 
   useEffect(() => {
     if (refreshToken) {
       const dto = { keyword: keyword };
-      dispatch(RoomService.getRoomList(dto)).then((response) => {
-        setRoomList(response.payload.data.data.roomList);
-      });
+      dispatch(RoomService.getRoomList(dto));
     }
   }, [refreshToken]);
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Backdrop } from "@mui/material";
 import { setUpdateRoomForm } from "../../modules/room";
 import { useEffect } from "react";
+import { RoomService } from "../../service/RoomService";
 
 const Wrap = styled.div`
   position: absolute;
@@ -106,12 +107,24 @@ const BottomBtn = styled.div`
   line-height: 170%;
 `;
 
-export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
+export const EditRoomName = ({
+  setEditNameOpen,
+  editNameOpen,
+  handleClose,
+}) => {
   const { updateRoomForm } = useSelector((state) => state.room);
   const [roomNm, setRoomNm] = useState(null);
   const dispatch = useDispatch();
   const update = () => {
-    setEditNameOpen(false);
+    const dto = {
+      privateRoomNm: updateRoomForm.roomNm,
+      roomId: updateRoomForm.roomId,
+    };
+    dispatch(RoomService.updateRoomNm(dto)).then((res) => {
+      setEditNameOpen(false);
+      handleClose();
+      dispatch(RoomService.getRoomList({ keyword: "" }));
+    });
   };
 
   const changeRoomName = (e) => {

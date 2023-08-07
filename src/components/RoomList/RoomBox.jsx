@@ -18,7 +18,7 @@ const Wrap = styled.div`
 `;
 
 const Title = styled.div`
-  width: 87px;
+  max-width: 300px;
   height: 24px;
 
   font-family: "Noto Sans KR";
@@ -330,6 +330,7 @@ export const RoomBox = ({ roomData }) => {
               <EditRoomName
                 setEditNameOpen={setEditNameOpen}
                 editNameOpen={editNameOpen}
+                handleClose={handleClose}
               />
             )}
           </EditWrap>

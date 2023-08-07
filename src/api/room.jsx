@@ -8,3 +8,15 @@ export const getRoomList = (keyword) => {
     },
   });
 };
+
+export const updateRoomName = (dto) => {
+  return axios.patch(
+    `${process.env.REACT_APP_BASE_URL}/room/verify/room-name`,
+    dto,
+    {
+      headers: {
+        Authorization: "Bearer " + getCookie("refreshToken"),
+      },
+    }
+  );
+};
