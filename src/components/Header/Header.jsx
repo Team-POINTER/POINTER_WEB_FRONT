@@ -17,9 +17,7 @@ export const Header = () => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -30,15 +28,17 @@ export const Header = () => {
 
   useEffect(() => {
     if (
+      accessToken != null &&
       refreshToken != null &&
       refreshToken != "undefined" &&
       refreshToken != undefined
     ) {
+      console.log(refreshToken);
       dispatch(AuthService.getUserInfo()).then((res) => {
         console.log(res);
       });
     }
-  }, []);
+  }, [accessToken]);
 
   return (
     <header className={styles.header}>
@@ -62,7 +62,7 @@ export const Header = () => {
           ))}
         <Link to="/setting">
           <button className={styles.user}>
-            {userInfo && userInfo.userName}
+            {userInfo && userInfo.userName && userInfo.userName + "님"}
           </button>
         </Link>
       </nav>
