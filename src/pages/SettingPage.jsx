@@ -1,17 +1,20 @@
 import React from "react";
 import { Header } from "../components/Header/Header";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthService } from "../service/AuthService";
+import { useNavigate } from "react-router-dom";
 
 const Nickname = styled.h3`
-    width: 80%;
-    color: var(--white, #FFF);
-    margin-left: 28.87px;
-    /* B 30 */
-    font-family: Noto Sans KR;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 170%; /* 51px */
+  width: 80%;
+  color: var(--white, #fff);
+  margin-left: 28.87px;
+  /* B 30 */
+  font-family: Noto Sans KR;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 170%; /* 51px */
 `;
 
 const Wrap = styled.div`
@@ -29,14 +32,14 @@ const Table = styled.button`
   width: 80%;
   display: flex;
   align-items: center;
-  color: var(--white, #FFF);
+  color: var(--white, #fff);
   /* R 16 */
   font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 170%; /* 27.2px */
-  border-bottom: 1px solid rgb(255,255,255, 0.5);
+  border-bottom: 1px solid rgb(255, 255, 255, 0.5);
 `;
 /*
 const Line = styled.div`
@@ -48,15 +51,29 @@ const Line = styled.div`
 */
 
 export const SettingPage = () => {
+  const { userInfo } = useSelector((state) => state.member);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logout = () => {
+    dispatch(AuthService.kakaoLogout()).then(() => {
+      navigate("/");
+    });
+  };
   return (
     <>
-      <Header/>
+      <Header />
       <Wrap>
-        <Nickname>포인터 님</Nickname>
-        <Table><img src="/img/Moon.png" alt="Moon"/> <p>모드 변경</p></Table>
-        <Table><p>로그아웃</p></Table>
-        <Table><p>회원 탈퇴</p></Table>
+        <Nickname> {userInfo && userInfo.userName + "님"}</Nickname>
+        <Table>
+          <img src="/img/Moon.png" alt="Moon" /> <p>모드 변경</p>
+        </Table>
+        <Table>
+          <p onClick={logout}>로그아웃</p>
+        </Table>
+        <Table>
+          <p>회원 탈퇴</p>
+        </Table>
       </Wrap>
     </>
-  )
-}
+  );
+};

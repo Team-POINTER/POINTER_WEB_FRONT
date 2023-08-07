@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "../components/Header/Header";
 import { RoomBox } from "../components/RoomList/RoomBox";
-import roomList from "../mock/room.json";
 import theme from "../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "../api/auth";
 import { AuthService } from "../service/AuthService";
 import { RoomService } from "../service/RoomService";
 import { getCookie } from "../function/cookie";
+import { useState } from "react";
 const Wrap = styled.div`
   margin: 0 auto;
 `;
@@ -43,23 +43,17 @@ const RoomWrap = styled.div`
 
 export const Home = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
-  const refreshToken = getCookie("refreshToken");
+  const { roomList } = useSelector((state) => state.room);
   const dispatch = useDispatch();
+  const [keyword, setKeyword] = useState("");
+  const refreshToken = getCookie("refreshToken");
 
   useEffect(() => {
-    if (
-      refreshToken != null &&
-      refreshToken != "undefined" &&
-      refreshToken != undefined
-    ) {
-      dispatch(AuthService.getUserInfo()).then((res) => {
-        console.log(res);
-      });
-      // dispatch(RoomService.getRoomList()).then((res) => {
-      //   console.log(res.payload.data);
-      // });
+    if (refreshToken) {
+      const dto = { keyword: keyword };
+      dispatch(RoomService.getRoomList(dto));
     }
-  }, []);
+  }, [refreshToken]);
 
   return (
     <Wrap>
