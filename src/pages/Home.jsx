@@ -43,23 +43,6 @@ const RoomWrap = styled.div`
 
 export const Home = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
-  const refreshToken = getCookie("refreshToken");
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (
-      refreshToken != null &&
-      refreshToken != "undefined" &&
-      refreshToken != undefined
-    ) {
-      dispatch(AuthService.getUserInfo()).then((res) => {
-        console.log(res);
-      });
-      // dispatch(RoomService.getRoomList()).then((res) => {
-      //   console.log(res.payload.data);
-      // });
-    }
-  }, []);
 
   return (
     <Wrap>
