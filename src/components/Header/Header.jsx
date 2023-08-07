@@ -28,17 +28,15 @@ export const Header = () => {
 
   useEffect(() => {
     if (
-      accessToken != null &&
       refreshToken != null &&
       refreshToken != "undefined" &&
       refreshToken != undefined
     ) {
-      console.log(refreshToken);
       dispatch(AuthService.getUserInfo()).then((res) => {
         console.log(res);
       });
     }
-  }, [accessToken]);
+  }, [refreshToken]);
 
   return (
     <header className={styles.header}>
