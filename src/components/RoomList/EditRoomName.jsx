@@ -108,7 +108,7 @@ const BottomBtn = styled.div`
 
 export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
   const { updateRoomForm } = useSelector((state) => state.room);
-  const [title, setTitle] = useState(null);
+  const [roomNm, setRoomNm] = useState(null);
   const dispatch = useDispatch();
   const update = () => {
     setEditNameOpen(false);
@@ -129,8 +129,8 @@ export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
   };
 
   useEffect(() => {
-    if (!title && updateRoomForm.title) {
-      setTitle(updateRoomForm.title);
+    if (!roomNm && updateRoomForm.roomNm) {
+      setRoomNm(updateRoomForm.roomNm);
     }
   }, [updateRoomForm]);
 
@@ -143,20 +143,22 @@ export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
       }}
       open={editNameOpen}
     >
-      {updateRoomForm.title && (
+      {updateRoomForm.roomNm && (
         <Wrap>
           <Container>
             <Box>
               <Title>룸 이름 편집</Title>
-              <Comment>{"'" + title + "'의 새로운 이름을 입력하세요."}</Comment>
+              <Comment>
+                {"'" + roomNm + "'의 새로운 이름을 입력하세요."}
+              </Comment>
               <InputBox>
                 <Input
-                  name={"title"}
-                  value={updateRoomForm.title}
+                  name={"roomNm"}
+                  value={updateRoomForm.roomNm}
                   maxLength={15}
                   onChange={changeRoomName}
                 />
-                <InputCnt>{updateRoomForm.title.length + " / " + 15}</InputCnt>
+                <InputCnt>{updateRoomForm.roomNm.length + " / " + 15}</InputCnt>
               </InputBox>
               <Bottom>
                 <BottomBtn

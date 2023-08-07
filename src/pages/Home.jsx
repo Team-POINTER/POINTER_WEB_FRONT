@@ -9,6 +9,7 @@ import { getUserInfo } from "../api/auth";
 import { AuthService } from "../service/AuthService";
 import { RoomService } from "../service/RoomService";
 import { getCookie } from "../function/cookie";
+import { useState } from "react";
 const Wrap = styled.div`
   margin: 0 auto;
 `;
@@ -43,6 +44,19 @@ const RoomWrap = styled.div`
 
 export const Home = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
+  const dispatch = useDispatch();
+  const [roomList, setRoomList] = useState([]);
+  const [keyword, setKeyword] = useState("");
+  const refreshToken = getCookie("refreshToken");
+
+  useEffect(() => {
+    if (refreshToken) {
+      const dto = { keyword: keyword };
+      dispatch(RoomService.getRoomList(dto)).then((response) => {
+        setRoomList(response.payload.data.data.roomList);
+      });
+    }
+  }, [refreshToken]);
 
   return (
     <Wrap>

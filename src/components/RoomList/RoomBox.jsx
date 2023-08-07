@@ -253,8 +253,8 @@ export const RoomBox = ({ roomData }) => {
     <>
       <Wrap>
         <Upper onClick={moveToRoom} style={{ cursor: "pointer" }}>
-          <Title>{roomData.title}</Title>
-          <Question>{roomData.recentQuestion}</Question>
+          <Title>{roomData.roomNm}</Title>
+          <Question>{roomData.question}</Question>
         </Upper>
 
         <Bottom>
@@ -263,7 +263,7 @@ export const RoomBox = ({ roomData }) => {
             <IconBox style={{ marginRight: "3px" }}>
               <Icon icon="writerMark" />
             </IconBox>
-            <Writer>{roomData.roomWriter}님</Writer>
+            <Writer>{roomData.topUserName && roomData.topUserName}님</Writer>
             <span
               style={{ fontSize: "12px", cursor: "pointer" }}
               onClick={moveToQuestionResult}
@@ -298,7 +298,7 @@ export const RoomBox = ({ roomData }) => {
                     border: "0px",
                   }}
                 >
-                  {"룸 '" + shortenTitle(roomData.title) + "'에 대해"}
+                  {"룸 '" + shortenTitle(roomData.roomNm) + "'에 대해"}
                 </EditDiv>
 
                 <EditDiv onClick={() => openRoomNameUpdate(roomData)}>
