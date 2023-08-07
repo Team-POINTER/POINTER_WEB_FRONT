@@ -8,6 +8,8 @@ export const kakaoLogin = (dto) => {
   return axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login/web`, dto);
 };
 
+// 토큰재발행
+
 export const getUserInfo = () => {
   return axios.get(`${process.env.REACT_APP_BASE_URL}/users/info`, {
     headers: {

@@ -9,4 +9,9 @@ export const AuthService = {
     const response = await getUserInfo();
     return response;
   }),
+
+  // 토큰재발행: createAsyncThunk(`auth/userInfo`, async (thunkApi) => {
+  //   const response = await auth쪽 토큰재발행();
+  //   return response;
+  // }),
 };
