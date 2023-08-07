@@ -15,22 +15,6 @@ export const KakaoCallBack = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (accessToken) navigate("/home");
-  }, [accessToken]);
-
-  useEffect(() => {
-    if (token) {
-      console.log(`Bearer ${token}`);
-      /* access_token 서버에 전송 */
-      const dto = { accessToken: token };
-      dispatch(AuthService.kakaoLogin(dto)).then((res) => {
-        console.log("데이터 성공 : " + JSON.stringify(res));
-        setToken(null);
-      });
-    }
-  }, [token]);
-
-  useEffect(() => {
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
     const grant_type = "authorization_code";
@@ -58,5 +42,22 @@ export const KakaoCallBack = () => {
         }
       });
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      console.log(`Bearer ${token}`);
+      /* access_token 서버에 전송 */
+      const dto = { accessToken: token };
+      dispatch(AuthService.kakaoLogin(dto)).then((res) => {
+        console.log("데이터 성공 : " + JSON.stringify(res));
+        setToken(null);
+      });
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (accessToken) navigate("/home");
+  }, [accessToken]);
+
   return <>로그인 중...</>;
 };

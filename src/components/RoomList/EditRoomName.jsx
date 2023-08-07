@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Backdrop } from "@mui/material";
 import { setUpdateRoomForm } from "../../modules/room";
 import { useEffect } from "react";
+import { RoomService } from "../../service/RoomService";
 
 const Wrap = styled.div`
   position: absolute;
@@ -106,12 +107,24 @@ const BottomBtn = styled.div`
   line-height: 170%;
 `;
 
-export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
+export const EditRoomName = ({
+  setEditNameOpen,
+  editNameOpen,
+  handleClose,
+}) => {
   const { updateRoomForm } = useSelector((state) => state.room);
-  const [title, setTitle] = useState(null);
+  const [roomNm, setRoomNm] = useState(null);
   const dispatch = useDispatch();
   const update = () => {
-    setEditNameOpen(false);
+    const dto = {
+      privateRoomNm: updateRoomForm.roomNm,
+      roomId: updateRoomForm.roomId,
+    };
+    dispatch(RoomService.updateRoomNm(dto)).then((res) => {
+      setEditNameOpen(false);
+      handleClose();
+      dispatch(RoomService.getRoomList({ keyword: "" }));
+    });
   };
 
   const changeRoomName = (e) => {
@@ -129,8 +142,8 @@ export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
   };
 
   useEffect(() => {
-    if (!title && updateRoomForm.title) {
-      setTitle(updateRoomForm.title);
+    if (!roomNm && updateRoomForm.roomNm) {
+      setRoomNm(updateRoomForm.roomNm);
     }
   }, [updateRoomForm]);
 
@@ -143,20 +156,22 @@ export const EditRoomName = ({ setEditNameOpen, editNameOpen }) => {
       }}
       open={editNameOpen}
     >
-      {updateRoomForm.title && (
+      {updateRoomForm.roomNm && (
         <Wrap>
           <Container>
             <Box>
               <Title>룸 이름 편집</Title>
-              <Comment>{"'" + title + "'의 새로운 이름을 입력하세요."}</Comment>
+              <Comment>
+                {"'" + roomNm + "'의 새로운 이름을 입력하세요."}
+              </Comment>
               <InputBox>
                 <Input
-                  name={"title"}
-                  value={updateRoomForm.title}
+                  name={"roomNm"}
+                  value={updateRoomForm.roomNm}
                   maxLength={15}
                   onChange={changeRoomName}
                 />
-                <InputCnt>{updateRoomForm.title.length + " / " + 15}</InputCnt>
+                <InputCnt>{updateRoomForm.roomNm.length + " / " + 15}</InputCnt>
               </InputBox>
               <Bottom>
                 <BottomBtn

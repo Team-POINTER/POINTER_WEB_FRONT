@@ -5,6 +5,7 @@ import { AuthService } from "../service/AuthService";
 const initialState = {
   accessToken: null,
   userId: null,
+  userInfo: {},
 };
 
 export const memberSlice = createSlice({
@@ -19,12 +20,18 @@ export const memberSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(AuthService.kakaoLogin.fulfilled, (state, action) => {
-      const response = action.payload.data.tokenDto;
-      setTokenToCookie(response.refreshToken);
-      state.accessToken = response.accessToken;
-      state.userId = response.userId;
-    });
+    builder
+      .addCase(AuthService.kakaoLogin.fulfilled, (state, action) => {
+        const response = action.payload.data.tokenDto;
+        setTokenToCookie(response.refreshToken);
+        state.accessToken = response.accessToken;
+        state.userId = response.userId;
+      })
+      .addCase(AuthService.getUserInfo.fulfilled, (state, action) => {
+        const response = action.payload.data.results;
+        state.userInfo = response;
+        setUserId(response.userId);
+      });
   },
 });
 
