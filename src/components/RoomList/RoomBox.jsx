@@ -265,7 +265,9 @@ export const RoomBox = ({ roomData }) => {
             <IconBox style={{ marginRight: "3px" }}>
               <Icon icon="writerMark" />
             </IconBox>
-            <Writer>{roomData.topUserName && roomData.topUserName}님</Writer>
+            <Writer>
+              {roomData.voted && roomData.topUserName && roomData.topUserName}님
+            </Writer>
             <span
               style={{ fontSize: "12px", cursor: "pointer" }}
               onClick={moveToQuestionResult}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Icon from "../../../icon/Icon";
-import IconBox from "../../../icon/IconBox";
+import Icon from "../icon/Icon";
+import IconBox from "../icon/IconBox";
 import { useEffect } from "react";
 import { Backdrop } from "@mui/material";
 import { useNavigate } from "react-router-dom";

@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import store from "./store";
 import { Home } from "./pages/Home";
 import { QuestionResult } from "./pages/QuestionResult";
-import { CreateQuestion } from "./components/RoomList/detail/CreateQuestion";
 import { UserPoint } from "./pages/UserPoint";
 import { PointResult } from "./pages/PointResult";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./login/Login";
 import { KakaoCallBack } from "./login/Kakao/KakaoCallBack";
 import { SettingPage } from "./pages/SettingPage";
+import { CreateQuestion } from "./pages/CreateQuestion";
 
 function App() {
   return (
