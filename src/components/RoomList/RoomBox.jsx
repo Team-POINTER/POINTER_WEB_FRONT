@@ -4,10 +4,11 @@ import styled from "styled-components";
 import Icon from "../../icon/Icon";
 import IconBox from "../../icon/IconBox";
 import theme from "../../styles/theme";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUpdateRoomForm } from "../../modules/room";
 import { EditRoomName } from "./EditRoomName";
 import { useNavigate } from "react-router-dom";
+import { leaveRoom } from "../../api/room";
 
 const Wrap = styled.div`
   width: 303.1px;
@@ -251,6 +252,11 @@ export const RoomBox = ({ roomData }) => {
     return shortTitle;
   };
 
+  const leaveRoomHandler = () => {
+    leaveRoom(roomData.roomId);
+    window.location.replace("/home");
+  };
+
   return (
     <>
       <Wrap>
@@ -312,6 +318,7 @@ export const RoomBox = ({ roomData }) => {
                 <EditDiv>{"친구 초대하기"}</EditDiv>
 
                 <EditDiv
+                  onClick={leaveRoomHandler}
                   style={{
                     color: theme.colors.orangered,
                   }}

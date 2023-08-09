@@ -32,5 +32,13 @@ export const createRoom = (roomNm) => {
         Authorization: "Bearer " + getCookie("refreshToken"),
       },
     }
-  )
+  );
+};
+
+export const leaveRoom = (roomId) => {
+  return axios.get(`${process.env.REACT_APP_BASE_URL}/room/${roomId}/exit`, {
+    headers: {
+      Authorization: "Bearer " + getCookie("refreshToken"),
+    },
+  });
 };
