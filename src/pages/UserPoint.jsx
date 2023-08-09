@@ -28,7 +28,9 @@ const PointBtn = styled.button`
     `}
   border-radius: 1rem;
   color: white;
-  
+  &:active {
+    background-color: rgb(255, 35, 1, 0.5);
+  }
 `;
 
 const Container = styled.div`
