@@ -1,23 +1,23 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Header } from '../components/Header/Header';
+import React, { useState, useEffect, Fragment } from "react";
+import { Header } from "../components/Header/Header";
 import styled from "styled-components";
-import topUser from '../mock/topUser.json';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { TopUser } from '../components/UserResult/TopUser';
-import { MySelf } from '../components/UserResult/Myself';
-import { v4 as uuidv4 } from 'uuid';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import { getCookie } from '../function/cookie';
-import { getAccessToken, getUserInfo } from '../api/auth';
-import QuestRegistBtn from '../UI/QuestionRegistrationBtn/QuestRegistBtn';
+import topUser from "../mock/topUser.json";
+import { useLocation, useNavigate } from "react-router-dom";
+import { TopUser } from "../components/UserResult/TopUser";
+import { MySelf } from "../components/UserResult/Myself";
+import { v4 as uuidv4 } from "uuid";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { getCookie } from "../function/cookie";
+import { getAccessToken, getUserInfo } from "../api/auth";
+import QuestRegistBtn from "../components/QuestionRegistrationBtn/QuestRegistBtn";
 
 const UserResult = styled.section`
   width: 759px;
   height: 268px;
   flex-shrink: 0;
   border-radius: 30px;
-  background: var(--white, #FFF);
+  background: var(--white, #fff);
   padding: 25.5px;
   margin: 0 auto;
   text-align: center;
@@ -25,7 +25,6 @@ const UserResult = styled.section`
   flex-direction: column;  */
   /* align-items: center; */
   position: relative; /* 추가: UserResult를 바닥 기준으로 정렬하기 위해 */
-
 `;
 
 const Bottom = styled.div`
@@ -43,10 +42,10 @@ const MyResultBtn = styled.button`
   align-items: center;
   gap: 8px;
   border-radius: 999px;
-  border: 2px solid var(--orangered, #FF2301);
+  border: 2px solid var(--orangered, #ff2301);
   background: transparent;
 
-  color: var(--orangered, #FF2301);
+  color: var(--orangered, #ff2301);
   text-align: center;
 
   /* B 16 */
@@ -56,10 +55,10 @@ const MyResultBtn = styled.button`
   font-weight: 700;
   line-height: 150%; /* 24px */
   cursor: pointer;
-`
+`;
 
 const Question = styled.p`
-  color: var(--white, #FFF);
+  color: var(--white, #fff);
   text-align: center;
   /* M 18 */
   font-family: Noto Sans KR;
@@ -68,9 +67,7 @@ const Question = styled.p`
   font-weight: 500;
   line-height: 150%;
   padding: 93px;
-`
-
-
+`;
 
 const LinkCopy = styled.div`
   display: inline-flex;
@@ -110,23 +107,22 @@ const Buttons = styled.div`
 
 export const PointResult = ({ room }) => {
   const [members, setMembers] = useState([]);
-  const [targetUser, setTargetUser] = useState('');
+  const [targetUser, setTargetUser] = useState("");
   const [userList, setUserList] = useState([]);
   const [totalVotingNum, setTotalVotingNum] = useState(0);
-  const [question, setQuestion] = useState('');
+  const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const {state} = useLocation();
-  const {roomData} = state;
+  const { state } = useLocation();
+  const { roomData } = state;
 
   useEffect(() => {
-
     const fetchData = async () => {
       setLoading(true);
       try {
         const user = await getAccessToken();
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/votes/${roomData.roomId}`, 
+          `${process.env.REACT_APP_BASE_URL}/votes/${roomData.roomId}`,
           {
             headers: {
               Authorization: `Bearer ${user.accessToken}`,
@@ -138,7 +134,6 @@ export const PointResult = ({ room }) => {
         setTargetUser(response.data.result.targetUser);
         setQuestion(response.data.result.question);
         // console.log(response.data.result.members);
-        
       } catch (e) {
         console.log(e);
       }
@@ -147,7 +142,6 @@ export const PointResult = ({ room }) => {
     fetchData();
   }, []);
 
-
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/result");
@@ -155,24 +149,21 @@ export const PointResult = ({ room }) => {
 
   return (
     <Fragment>
-      <Header/>
+      <Header />
       <Question>{question}</Question>
       <Buttons>
-        <QuestRegistBtn/>
+        <QuestRegistBtn />
         <LinkCopy>링크로 초대</LinkCopy>
       </Buttons>
       <UserResult>
-        {
-          members.map((user, index) => (
-            <TopUser key={user.userId} index={index} user={user} />
-          ))
-        }
+        {members.map((user, index) => (
+          <TopUser key={user.userId} index={index} user={user} />
+        ))}
         <Bottom>
-          {targetUser!=='' && <MySelf user={targetUser} />}
+          {targetUser !== "" && <MySelf user={targetUser} />}
           <MyResultBtn onClick={handleClick}>나의 결과 보기</MyResultBtn>
         </Bottom>
       </UserResult>
-      
     </Fragment>
   );
 };
