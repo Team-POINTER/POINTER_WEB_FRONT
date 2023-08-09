@@ -74,7 +74,9 @@ export const UserPoint = () => {
   const [loading, setLoading] = useState(false);
   const [members, setMembers] = useState();
 
+  const location = useLocation();
   const navigate = useNavigate();
+
   const { state } = useLocation();
   const { roomData } = state;
   // console.log("room 데이터: ");

@@ -43,7 +43,9 @@ const Question = styled.div`
   margin-bottom: 25px;
 `;
 
-const Upper = styled.div``;
+const Upper = styled.div`
+  cursor: pointer;
+`;
 
 const Bottom = styled.div`
   display: flex;
