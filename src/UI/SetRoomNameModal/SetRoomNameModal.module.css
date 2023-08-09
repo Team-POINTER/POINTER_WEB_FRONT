@@ -18,7 +18,7 @@
   z-index: 100;
   overflow: hidden;
   flex-shrink: 0;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   animation: slide-down 300ms ease-out forwards;
 }
 
@@ -28,8 +28,8 @@
 
 .header p {
   margin: 0;
-  color: var(--grayscale-60, #575A6B);
-/* 13/r */
+  color: var(--grayscale-60, #575a6b);
+  /* 13/r */
   font-family: Noto Sans KR;
   font-size: 13px;
   font-style: normal;
@@ -42,7 +42,7 @@
   padding: 11.5px 14.892px 11.5px 19.339px;
   justify-content: space-between;
   border-radius: 25px;
-  background: var(--grayscale-10, #E2E3EC);
+  background: var(--grayscale-10, #e2e3ec);
   width: 300px;
   margin-left: 13px;
 }
@@ -61,7 +61,7 @@
 }
 
 .content span {
-  color: var(--grayscale-60, #575A6B);
+  color: var(--grayscale-60, #575a6b);
   text-align: right;
   font-family: Noto Sans KR;
   font-size: 11px;
@@ -76,7 +76,7 @@
   justify-content: space-around;
 }
 
-.actions button{
+.actions button {
   background-color: transparent;
   cursor: pointer;
   font-family: Noto Sans KR;
@@ -84,17 +84,17 @@
   font-weight: 500;
   font-style: normal;
   margin-bottom: 3px;
+  width: 200px;
 }
 
-.actions > button:nth-child(1) {
-  margin-left: 30px;
+.actions button:hover,
+.actions button:active {
+  background-color: rgba(148, 148, 148, 0.2);
 }
 
 .actions > button:nth-child(3) {
-  margin-right: 33px;
-  color: var(--orangered, #FF2301);
+  color: var(--orangered, #ff2301);
 }
-
 
 hr {
   margin: 23.21px 15px 0px 15px;
