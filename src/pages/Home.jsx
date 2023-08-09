@@ -61,7 +61,7 @@ export const Home = () => {
       {roomList && (
         <RoomWrap>
           <RoomContainer row={roomList.length}>
-            {roomList.reverse().map((room, index) => (
+            {roomList.map((room, index) => (
               <RoomBox roomData={room} key={index}></RoomBox>
             ))}
           </RoomContainer>
