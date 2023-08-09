@@ -19,6 +19,7 @@
   overflow: hidden;
   flex-shrink: 0;
   transform: translate(-50%,-50%);
+  animation: slide-down 300ms ease-out forwards;
 }
 
 .header {
@@ -108,4 +109,15 @@ hr {
   border-left: none;
   border-top: none;
   height: 57.793px;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
