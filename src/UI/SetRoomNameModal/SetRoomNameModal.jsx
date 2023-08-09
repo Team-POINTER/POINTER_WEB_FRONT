@@ -11,11 +11,14 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   const navigate = useNavigate();
+  const [isMaxLength, setIsMaxLength] = useState(false);
   const [text, setText] = useState({
     text: "",
     length: 0,
   });
   const TextHandler = (e) => {
+    if (e.target.value.length >= 15) setIsMaxLength(true);
+    else setIsMaxLength(false);
     if (e.target.value.length > 15) return;
     setText((prev) => ({
       text: e.target.value,
@@ -25,6 +28,7 @@ const ModalOverlay = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (text.text.trim() <= 0) return;
     createRoom(text.text);
     window.location.replace("/home");
   };
@@ -36,7 +40,9 @@ const ModalOverlay = (props) => {
         </header>
         <div className={styles.content}>
           <input value={text.text} onChange={TextHandler} type="text" />
-          <span>{text.length}/15</span>
+          <span style={isMaxLength ? { color: "red" } : {}}>
+            {text.length}/15
+          </span>
         </div>
         <hr />
         <footer className={styles.actions}>
