@@ -18,15 +18,17 @@ const Wrap = styled.div`
 const PointBtn = styled.button`
   width: 124px;
   min-height: 39px;
+  cursor: pointer;
   background-color: #ff2301;
   ${(props) =>
     !props.available &&
     css`
       opacity: 0.5;
+      cursor: default;
     `}
   border-radius: 1rem;
   color: white;
-  cursor: pointer;
+  
 `;
 
 const Container = styled.div`
