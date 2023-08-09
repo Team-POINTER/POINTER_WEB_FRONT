@@ -5,9 +5,11 @@ import { Link, Router, useLocation } from "react-router-dom";
 import { AuthService } from "../../service/AuthService";
 import { getCookie } from "../../function/cookie";
 import { useDispatch, useSelector } from "react-redux";
+import { SetRoomNameModal } from "../../UI/SetRoomNameModal/SetRoomNameModal";
 
 export const Header = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isShownModal, setIsShownModal] = useState(false);
   const { accessToken, userId, userInfo } = useSelector(
     (state) => state.member
   );
@@ -38,6 +40,10 @@ export const Header = () => {
     }
   }, [refreshToken]);
 
+  const modalHandler = () => {
+    setIsShownModal(prev => !prev);
+  };
+
   return (
     <header className={styles.header}>
       <Link to="/home">
@@ -54,10 +60,15 @@ export const Header = () => {
         {router.pathname.indexOf("/home") == 0 &&
           (windowWidth <= 820 ? (
             // <button className={styles.addButton}><img className={styles.plusImg} src="./img/x.png" alt="+버튼" /></button>
-            <button className={styles.addButton}>+</button>
+            <button onClick={modalHandler} className={styles.addButton}>
+              +
+            </button>
           ) : (
-            <button className={styles.room}>룸 만들기</button>
+            <button onClick={modalHandler} className={styles.room}>
+              룸 만들기
+            </button>
           ))}
+        {isShownModal && <SetRoomNameModal onConfirm={modalHandler}/>}
         <Link to="/setting">
           <button className={styles.user}>
             {userInfo && userInfo.userName && userInfo.userName + "님"}
