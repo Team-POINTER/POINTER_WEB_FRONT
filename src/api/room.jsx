@@ -20,3 +20,17 @@ export const updateRoomName = (dto) => {
     }
   );
 };
+
+export const createRoom = (roomNm) => {
+  return axios.post(
+    `${process.env.REACT_APP_BASE_URL}/room/create`,
+    {
+      roomNm: roomNm,
+    },
+    {
+      headers: {
+        Authorization: "Bearer " + getCookie("refreshToken"),
+      },
+    }
+  )
+};
