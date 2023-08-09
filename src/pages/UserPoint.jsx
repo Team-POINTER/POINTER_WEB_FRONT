@@ -17,7 +17,7 @@ const Wrap = styled.div`
 
 const PointBtn = styled.button`
   width: 124px;
-  height: 39px;
+  min-height: 39px;
   background-color: #ff2301;
   ${(props) =>
     !props.available &&
