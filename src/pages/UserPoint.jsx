@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../components/Header/Header";
-import styled from "styled-components";
+import styled, { css }  from "styled-components";
 import { HintSection } from "../components/Hint/HintSection";
 import userList from "../mock/user-cell.json";
 import { UserBox } from "../components/UserList/UserBox";
@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getCookie } from "../function/cookie";
 import { getAccessToken } from "../api/auth";
+import { useSelector } from "react-redux";
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -18,6 +19,11 @@ const PointBtn = styled.button`
   width: 124px;
   height: 39px;
   background-color: #ff2301;
+  ${(props) =>
+    !props.available &&
+    css`
+      opacity: 0.5;
+    `}
   border-radius: 1rem;
   color: white;
   cursor: pointer;
@@ -79,8 +85,8 @@ export const UserPoint = () => {
 
   const { state } = useLocation();
   const { roomData } = state;
-  // console.log("room 데이터: ");
-  // console.log(roomData);
+  console.log("roomData");
+  console.log(roomData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -106,15 +112,16 @@ export const UserPoint = () => {
   }, []);
 
   const handleUserSelect = (user) => {
-    if(selectedUsers.includes(user.name)) {
-      setSelectedUsers(prev => prev.filter(selectedUser => selectedUser !== user.name));
+    if (selectedUsers.includes(user.name)) {
+      setSelectedUsers((prev) =>
+        prev.filter((selectedUser) => selectedUser !== user.name)
+      );
     } else {
-      setSelectedUsers(prev => [...prev, user.name]);
+      setSelectedUsers((prev) => [...prev, user.name]);
     }
   };
 
   const handlePointBtnClick = () => {
-
     navigate("/point-result", { state: { roomData } });
   };
 
@@ -129,9 +136,15 @@ export const UserPoint = () => {
         <HintSection />
         <Question>{question}</Question>
         <UserListSection names={selectedUsers} />
-        <PointBtn onClick={handlePointBtnClick}>
-          <img src="/img/POINT_btn.png" alt="" />
-        </PointBtn>
+        {selectedUsers.length ? (
+          <PointBtn available={true} onClick={handlePointBtnClick}>
+            <img src="/img/POINT_btn.png" alt="" />
+          </PointBtn>
+        ) : (
+          <PointBtn disabled available={false} onClick={handlePointBtnClick}>
+            <img src="/img/POINT_btn.png" alt="" />
+          </PointBtn>
+        )}
         <Notice>질문에 알맞는 사람을 한 명 이상 선택해주세요!</Notice>
         {members && (
           <StyledUl>
