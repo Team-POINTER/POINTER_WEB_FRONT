@@ -10,6 +10,7 @@ import axios from "axios";
 import { getCookie } from "../function/cookie";
 import { getAccessToken } from "../api/auth";
 import { useSelector } from "react-redux";
+import { voting } from "../api/vote";
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -81,10 +82,11 @@ const Question = styled.p`
 
 export const UserPoint = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [selectedUserNames, setSelectedUserNames] = useState([]);
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [members, setMembers] = useState();
+  const [hintText, setHintText] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -124,11 +126,22 @@ export const UserPoint = () => {
       );
     } else {
       setSelectedUsers((prev) => [...prev, user.name]);
+      setSelectedUserIds((prev) => [...prev, user.userId]);
     }
   };
 
   const handlePointBtnClick = () => {
+    voting({
+      questionId: roomData.questionId,
+      userId: roomData.userId,
+      votedUserIds: selectedUserIds,
+      hint: hintText,
+    });
     navigate("/point-result", { state: { roomData } });
+  };
+
+  const setHintHandler = (text) => {
+    setHintText(text);
   };
 
   if (loading) {
@@ -139,7 +152,7 @@ export const UserPoint = () => {
     <Wrap>
       <Header />
       <Container>
-        <HintSection />
+        <HintSection hint={hintText} setHint={setHintHandler} />
         <Question>{question}</Question>
         <UserListSection names={selectedUsers} />
         {selectedUsers.length ? (
