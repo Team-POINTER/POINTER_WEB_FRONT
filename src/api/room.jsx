@@ -44,14 +44,11 @@ export const leaveRoom = (roomId) => {
 };
 
 export const roomLink = (roomId) => {
-  console.log(`${process.env.REACT_APP_BASE_URL}/${roomId}/invitation`);
-  console.log("Bearer " + getCookie("refreshToken"))
-  return axios.get(`${process.env.REACT_APP_BASE_URL}/${roomId}/invitation`, {
-    headers: {
-      Authorization: "Bearer " + getCookie("refreshToken"),
-    },
-  })
-  .then(res => {
-    console.log(res);
-  })
-}
+  return axios
+    .get(`${process.env.REACT_APP_BASE_URL}/room/${roomId}/invitation`, {
+      headers: {
+        Authorization: "Bearer " + getCookie("refreshToken"),
+      },
+    })
+    .then((res) => res.data.data);
+};
