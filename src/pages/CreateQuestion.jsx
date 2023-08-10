@@ -48,6 +48,8 @@ const InputBox = styled.div`
 
     background: transparent;
     border: none;
+    outline: none;
+
     resize: none;
 
     width: 561px;
@@ -295,14 +297,14 @@ export const CreateQuestion = ({}) => {
           {width > 834 ? (
             <textarea
               cols="45"
-              rows="1"
+              rows="2"
               maxLength={45}
               placeholder="질문을 입력하세요."
             />
           ) : (
             <textarea
               cols="15"
-              rows="3"
+              rows="4"
               maxLength={45}
               placeholder="질문을 입력하세요."
             />
