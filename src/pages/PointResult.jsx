@@ -131,11 +131,9 @@ export const PointResult = ({ room }) => {
             },
           }
         );
-        console.log(response);
         setMembers(response.data.result.members);
         setTargetUser(response.data.result.targetUser);
         setQuestion(response.data.result.question);
-        // console.log(response.data.result.members);
       } catch (e) {
         console.log(e);
       }
@@ -150,14 +148,13 @@ export const PointResult = ({ room }) => {
   };
 
   const LinkHandler = async () => {
-
     try {
-      const data = roomLink(roomData.roomId);
-      await navigator.clipboard.writeText();
+      const data = await roomLink(roomData.roomId);
+      await navigator.clipboard.writeText(data);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   return (
     <Fragment>
       <Header />
