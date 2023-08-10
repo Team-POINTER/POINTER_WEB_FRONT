@@ -22,25 +22,34 @@ export const updateRoomName = (dto) => {
 };
 
 export const createRoom = (roomNm) => {
-  return axios.post(
-    `${process.env.REACT_APP_BASE_URL}/room/create`,
-    {
-      roomNm: roomNm,
-    },
-    {
-      headers: {
-        Authorization: "Bearer " + getCookie("refreshToken"),
+  return axios
+    .post(
+      `${process.env.REACT_APP_BASE_URL}/room/create`,
+      {
+        roomNm: roomNm,
       },
-    }
-  );
+      {
+        headers: {
+          Authorization: "Bearer " + getCookie("refreshToken"),
+        },
+      }
+    )
+    .then((res) => {
+      window.location.replace("/home");
+    })
+    .catch((e) => console.log(e));
 };
 
 export const leaveRoom = (roomId) => {
-  return axios.get(`${process.env.REACT_APP_BASE_URL}/room/${roomId}/exit`, {
-    headers: {
-      Authorization: "Bearer " + getCookie("refreshToken"),
-    },
-  });
+  return axios
+    .get(`${process.env.REACT_APP_BASE_URL}/room/${roomId}/exit`, {
+      headers: {
+        Authorization: "Bearer " + getCookie("refreshToken"),
+      },
+    })
+    .then((res) => {
+      window.location.replace("/home");
+    });
 };
 
 export const roomLink = (roomId) => {

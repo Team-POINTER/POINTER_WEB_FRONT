@@ -30,7 +30,6 @@ const ModalOverlay = (props) => {
     e.preventDefault();
     if (text.text.trim() <= 0) return;
     createRoom(text.text);
-    window.location.replace("/home");
   };
   return (
     <Card className={styles.modal}>
