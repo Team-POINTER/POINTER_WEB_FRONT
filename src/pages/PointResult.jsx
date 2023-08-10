@@ -151,8 +151,10 @@ export const PointResult = ({ room }) => {
     try {
       const data = await roomLink(roomData.roomId);
       await navigator.clipboard.writeText(data);
+      alert('클립보드에 복사되었습니다.');
     } catch (err) {
       console.log(err);
+      alert('클립보드 복사에 실패하였습니다.');
     }
   };
   return (
