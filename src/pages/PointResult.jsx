@@ -11,6 +11,7 @@ import axios from "axios";
 import { getCookie } from "../function/cookie";
 import { getAccessToken, getUserInfo } from "../api/auth";
 import QuestRegistBtn from "../components/QuestionRegistrationBtn/QuestRegistBtn";
+import { roomLink } from "../api/room";
 
 const UserResult = styled.section`
   width: 759px;
@@ -88,6 +89,7 @@ const LinkCopy = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
+  cursor: pointer;
 `;
 
 const Buttons = styled.div`
@@ -147,13 +149,22 @@ export const PointResult = ({ room }) => {
     navigate("/result");
   };
 
+  const LinkHandler = async () => {
+
+    try {
+      const data = roomLink(roomData.roomId);
+      await navigator.clipboard.writeText();
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <Fragment>
       <Header />
       <Question>{question}</Question>
       <Buttons>
         <QuestRegistBtn />
-        <LinkCopy>링크로 초대</LinkCopy>
+        <LinkCopy onClick={LinkHandler}>링크로 초대</LinkCopy>
       </Buttons>
       <UserResult>
         {members.map((user, index) => (
