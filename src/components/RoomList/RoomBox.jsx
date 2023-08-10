@@ -254,7 +254,6 @@ export const RoomBox = ({ roomData }) => {
 
   const leaveRoomHandler = () => {
     leaveRoom(roomData.roomId);
-    window.location.replace("/home");
   };
 
   return (
