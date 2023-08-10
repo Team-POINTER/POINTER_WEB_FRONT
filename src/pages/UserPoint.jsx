@@ -131,6 +131,11 @@ export const UserPoint = () => {
   };
 
   const handlePointBtnClick = () => {
+    if (!selectedUsers.length) return;
+    if (!hintText.length) {
+      document.getElementById("hintInputField").focus();
+      return;
+    }
     voting({
       questionId: roomData.questionId,
       userId: roomData.userId,
