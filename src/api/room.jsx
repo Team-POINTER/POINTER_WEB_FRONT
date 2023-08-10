@@ -32,7 +32,12 @@ export const createRoom = (roomNm) => {
         Authorization: "Bearer " + getCookie("refreshToken"),
       },
     }
-  );
+    
+  ).then(res => {
+    console.log(res);
+    window.location.replace("/home");
+  })
+  .catch(e => console.log(e));
 };
 
 export const leaveRoom = (roomId) => {
