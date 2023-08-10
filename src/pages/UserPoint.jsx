@@ -131,6 +131,8 @@ export const UserPoint = () => {
   };
 
   const handlePointBtnClick = () => {
+    if(!selectedUsers.length) return;
+    if(!hintText.length) return;
     voting({
       questionId: roomData.questionId,
       userId: roomData.userId,
