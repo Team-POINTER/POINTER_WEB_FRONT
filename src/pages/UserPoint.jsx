@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../components/Header/Header";
-import styled, { css }  from "styled-components";
+import styled, { css } from "styled-components";
 import { HintSection } from "../components/Hint/HintSection";
 import userList from "../mock/user-cell.json";
 import { UserBox } from "../components/UserList/UserBox";
@@ -10,6 +10,7 @@ import axios from "axios";
 import { getCookie } from "../function/cookie";
 import { getAccessToken } from "../api/auth";
 import { useSelector } from "react-redux";
+import { voting } from "../api/vote";
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -21,16 +22,18 @@ const PointBtn = styled.button`
   cursor: pointer;
   background-color: #ff2301;
   ${(props) =>
-    !props.available &&
-    css`
-      opacity: 0.5;
-      cursor: default;
-    `}
+    !props.available
+      ? css`
+          opacity: 0.5;
+          cursor: default;
+        `
+      : css`
+          &:active {
+            background-color: rgb(255, 35, 1, 0.5);
+          }
+        `}
   border-radius: 1rem;
   color: white;
-  &:active {
-    background-color: rgb(255, 35, 1, 0.5);
-  }
 `;
 
 const Container = styled.div`
@@ -79,10 +82,11 @@ const Question = styled.p`
 
 export const UserPoint = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [selectedUserNames, setSelectedUserNames] = useState([]);
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [members, setMembers] = useState();
+  const [hintText, setHintText] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -122,11 +126,22 @@ export const UserPoint = () => {
       );
     } else {
       setSelectedUsers((prev) => [...prev, user.name]);
+      setSelectedUserIds((prev) => [...prev, user.userId]);
     }
   };
 
   const handlePointBtnClick = () => {
+    voting({
+      questionId: roomData.questionId,
+      userId: roomData.userId,
+      votedUserIds: selectedUserIds,
+      hint: hintText,
+    });
     navigate("/point-result", { state: { roomData } });
+  };
+
+  const setHintHandler = (text) => {
+    setHintText(text);
   };
 
   if (loading) {
@@ -137,7 +152,7 @@ export const UserPoint = () => {
     <Wrap>
       <Header />
       <Container>
-        <HintSection />
+        <HintSection hint={hintText} setHint={setHintHandler} />
         <Question>{question}</Question>
         <UserListSection names={selectedUsers} />
         {selectedUsers.length ? (
@@ -145,7 +160,7 @@ export const UserPoint = () => {
             <img src="/img/POINT_btn.png" alt="" />
           </PointBtn>
         ) : (
-          <PointBtn disabled available={false} onClick={handlePointBtnClick}>
+          <PointBtn disabled available={false}>
             <img src="/img/POINT_btn.png" alt="" />
           </PointBtn>
         )}
