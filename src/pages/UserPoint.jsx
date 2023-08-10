@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../components/Header/Header";
-import styled, { css }  from "styled-components";
+import styled, { css } from "styled-components";
 import { HintSection } from "../components/Hint/HintSection";
 import userList from "../mock/user-cell.json";
 import { UserBox } from "../components/UserList/UserBox";
@@ -21,16 +21,18 @@ const PointBtn = styled.button`
   cursor: pointer;
   background-color: #ff2301;
   ${(props) =>
-    !props.available &&
-    css`
-      opacity: 0.5;
-      cursor: default;
-    `}
+    !props.available
+      ? css`
+          opacity: 0.5;
+          cursor: default;
+        `
+      : css`
+          &:active {
+            background-color: rgb(255, 35, 1, 0.5);
+          }
+        `}
   border-radius: 1rem;
   color: white;
-  &:active {
-    background-color: rgb(255, 35, 1, 0.5);
-  }
 `;
 
 const Container = styled.div`
@@ -145,7 +147,7 @@ export const UserPoint = () => {
             <img src="/img/POINT_btn.png" alt="" />
           </PointBtn>
         ) : (
-          <PointBtn disabled available={false} onClick={handlePointBtnClick}>
+          <PointBtn disabled available={false}>
             <img src="/img/POINT_btn.png" alt="" />
           </PointBtn>
         )}
