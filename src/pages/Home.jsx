@@ -9,37 +9,9 @@ import { AuthService } from "../service/AuthService";
 import { RoomService } from "../service/RoomService";
 import { getCookie } from "../function/cookie";
 import { useState } from "react";
-const Wrap = styled.div`
-  margin: 0 auto;
-`;
-
-const RoomContainer = styled.div`
-  height: ${({ row }) => (row / 2) * (126.75 + 18) + "px"};
-
-  display: flex;
-  gap: 22px;
-  flex-wrap: wrap;
-`;
-
-const RoomWrap = styled.div`
-  width: 1094px;
-  height: 70vh;
-  ${theme.scrollY};
-  padding: 0px 21.5px;
-
-  @media (min-width: 835px) and (max-width: 1200px) {
-    width: 722px;
-    margin: 0 auto;
-  }
-
-  @media screen and (max-width: 834px) {
-    width: 350px;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 18px;
-  }
-`;
+import RoomWrap from "../UI/RoomWrap/RoomWrap";
+import RoomContainer from "../UI/RoomContainer/RoomContainer";
+import Wrap from "../UI/Wrap/Wrap";
 
 export const Home = () => {
   const { accessToken, userId } = useSelector((state) => state.member);
@@ -51,7 +23,7 @@ export const Home = () => {
   useEffect(() => {
     if (refreshToken) {
       const dto = { keyword: keyword };
-      dispatch(RoomService.getRoomList(dto));
+      dispatch(RoomService.myResultList(dto));
     }
   }, [refreshToken]);
 
