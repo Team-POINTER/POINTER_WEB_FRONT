@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getCookie } from "../function/cookie";
+import { getAccessToken } from "./auth";
 
 export const getRoomList = (keyword) => {
   return axios.get(`${process.env.REACT_APP_BASE_URL}/room?kwd=` + keyword, {
@@ -60,4 +61,14 @@ export const roomLink = (roomId) => {
       },
     })
     .then((res) => res.data.data);
+};
+
+export const myResultList = async (roomId) => {
+  return axios
+    .get(`${process.env.REACT_APP_BASE_URL}/questions/${roomId}`, {
+      headers: {
+        Authorization: "Bearer " + getCookie("refreshToken"),
+      },
+    })
+    .then(res => res.data.result);
 };
