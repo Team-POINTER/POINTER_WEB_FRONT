@@ -87,14 +87,10 @@ export const UserPoint = () => {
   const [loading, setLoading] = useState(false);
   const [members, setMembers] = useState();
   const [hintText, setHintText] = useState("");
-
-  const location = useLocation();
   const navigate = useNavigate();
 
   const { state } = useLocation();
   const { roomData } = state;
-  console.log("roomData");
-  console.log(roomData);
 
   useEffect(() => {
     const fetchData = async () => {

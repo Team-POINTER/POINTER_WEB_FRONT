@@ -143,8 +143,8 @@ export const PointResult = ({ room }) => {
   }, []);
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/result");
+  const MyResultHandler = () => {
+    navigate("/result-list", { state: { roomData } });
   };
 
   const LinkHandler = async () => {
@@ -166,7 +166,7 @@ export const PointResult = ({ room }) => {
       <Header />
       <Question>{question}</Question>
       <Buttons>
-        <QuestRegistBtn onClickHandler={createQuestionBtn}/>
+        <QuestRegistBtn onClickHandler={createQuestionBtn} />
         <LinkCopy onClick={LinkHandler}>링크로 초대</LinkCopy>
       </Buttons>
       <UserResult>
@@ -175,7 +175,7 @@ export const PointResult = ({ room }) => {
         ))}
         <Bottom>
           {targetUser !== "" && <MySelf user={targetUser} />}
-          <MyResultBtn onClick={handleClick}>나의 결과 보기</MyResultBtn>
+          <MyResultBtn onClick={MyResultHandler}>나의 결과 보기</MyResultBtn>
         </Bottom>
       </UserResult>
     </Fragment>
