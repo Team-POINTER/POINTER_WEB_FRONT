@@ -23,7 +23,7 @@ export const Home = () => {
   useEffect(() => {
     if (refreshToken) {
       const dto = { keyword: keyword };
-      dispatch(RoomService.myResultList(dto));
+      dispatch(RoomService.getRoomList(dto));
     }
   }, [refreshToken]);
 
