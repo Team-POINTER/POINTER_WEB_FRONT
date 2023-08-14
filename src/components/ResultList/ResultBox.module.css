@@ -1,0 +1,53 @@
+.container {
+  width: 303.1px;
+  height: 112.75px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 24.47px 25.3px 16.5px 21.6px;
+  cursor: pointer;
+}
+
+.question {
+  width: 285px;
+  height: 84px;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap:break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vote {
+  color: var(--orangered, #FF2301);
+
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 27px */
+}
+
+.date {
+  color: var(--black, #000);
+  text-align: right;
+  /* R 13 */
+  font-family: Noto Sans KR;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 19.5px */
+  margin-top: 12px;
+}
