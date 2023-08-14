@@ -12,11 +12,13 @@ import styled from "styled-components";
 import RoomContainer from "../UI/RoomContainer/RoomContainer";
 import ResultBox from "../components/ResultList/ResultBox";
 import Wrap from "../UI/Wrap/Wrap";
+import BasicModal from "../components/Modal/BasicModal/BasicModal";
 
 const MyResultList = (props) => {
   const { state } = useLocation();
   const { roomData } = state;
   const [roomList, setRoomList] = useState([]);
+  const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -27,6 +29,20 @@ const MyResultList = (props) => {
     fetch();
   }, []);
 
+  const modalHandler = () => {
+    setIsModal(true);
+    console.log(isModal);
+  };
+
+  const modalReturnHandler = () => {
+    setIsModal(false);
+    window.open("https://www.apple.com/kr/app-store/", "_blank");
+  };
+
+  const modalBackClick = () => {
+    setIsModal(false);
+  };
+
   return (
     <Wrap>
       <Header />
@@ -34,10 +50,22 @@ const MyResultList = (props) => {
         <RoomWrap>
           <RoomContainer row={roomList.length}>
             {roomList.map((room, index) => (
-              <ResultBox roomData={room} key={index}></ResultBox>
+              <ResultBox
+                onClick={modalHandler}
+                roomData={room}
+                key={index}
+              ></ResultBox>
             ))}
           </RoomContainer>
         </RoomWrap>
+      )}
+      {isModal && (
+        <BasicModal
+          title="포인터 앱에서 결과를 확인해보세요"
+          returnComment="앱스토어로 이동"
+          onConfirm={modalReturnHandler}
+          onClickBack={modalBackClick}
+        />
       )}
     </Wrap>
   );
