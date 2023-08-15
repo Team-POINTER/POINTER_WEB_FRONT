@@ -12,6 +12,7 @@ import { getAccessToken } from "../api/auth";
 import { useSelector } from "react-redux";
 import { voting } from "../api/vote";
 import { LinkInvite } from "../api/invite";
+import { voteOrNot } from "../api/room";
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -121,24 +122,42 @@ export const UserPoint = () => {
       }
       setLoading(false);
     };
+    
+    const inviteFetchData = async (invitationCode) => {
+      try {
+        const response = await LinkInvite(invitationCode);
+        console.log(response);
+        setMembers(response.data.data.roomMembers);
+        setQuestion(response.data.data.question);
+      } catch(e) {
+        console.log(e);
+      }
+    }
 
+    const voteOrNotFetchData = async (question) => {
+      try {
+        const response = await voteOrNot(roomData.questionId);
+        console.log(response.vote);
+        if(response.vote == false) {
+          navigate('/home');
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    }
     if (
       pathname.indexOf("/invitation-link") == 0 &&
       getCookie("refreshToken") == null
     ) {
       navigate("/");  // 새로 로그인 -> 방으로 가는 컴포넌트 구현해야함
     } else if (pathname.indexOf("/invitation-link") == 0) {
-      // console.log(invitationCode);
-      const response = LinkInvite(invitationCode);
-      console.log(response)
-      // console.log(invitationCode);
+      inviteFetchData(invitationCode);
     } else if (getCookie("refreshToken") == null) {
       navigate("/");
     } else if (!roomData) {
-      // roomData 가 없을 때
       navigate("/home");
     } else {
-      
+      voteOrNotFetchData();
       fetchData();
     }
   }, []);
