@@ -128,6 +128,7 @@ export const UserPoint = () => {
     ) {
       navigate("/");  // 새로 로그인 -> 방으로 가는 컴포넌트 구현해야함
     } else if (pathname.indexOf("/invitation-link") == 0) {
+      // console.log(invitationCode);
       const response = LinkInvite(invitationCode);
       console.log(response)
       // console.log(invitationCode);
@@ -183,7 +184,7 @@ export const UserPoint = () => {
         <HintSection hint={hintText} setHint={setHintHandler} />
         <Question>{question}</Question>
         <UserListSection names={selectedUsers} />
-        {selectedUsers.length ? (
+        {selectedUsers.length && hintText.length ? (
           <PointBtn available={true} onClick={handlePointBtnClick}>
             <img src="/img/POINT_btn.png" alt="" />
           </PointBtn>
