@@ -107,11 +107,8 @@ const TopSection = styled.div`
 export const PointResult = ({ room }) => {
   const [members, setMembers] = useState([]);
   const [targetUser, setTargetUser] = useState("");
-  const [userList, setUserList] = useState([]);
-  const [totalVotingNum, setTotalVotingNum] = useState(0);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
-
   const { state } = useLocation();
   const { roomData } = state;
 
@@ -159,7 +156,11 @@ export const PointResult = ({ room }) => {
   const createQuestionBtn = () => {
     navigate("/question", { state: { roomData } });
   };
-  console.log(members);
+
+  if (loading) {
+    return <h1>로딩중</h1>;
+  }
+
   return (
     <Fragment style={{ position: "absolute" }}>
       <Header />
