@@ -5,12 +5,13 @@ import { HintSection } from "../components/Hint/HintSection";
 import userList from "../mock/user-cell.json";
 import { UserBox } from "../components/UserList/UserBox";
 import { UserListSection } from "../components/UserList/UserListSection";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { getCookie } from "../function/cookie";
 import { getAccessToken } from "../api/auth";
 import { useSelector } from "react-redux";
 import { voting } from "../api/vote";
+import { LinkInvite } from "../api/invite";
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -90,9 +91,15 @@ export const UserPoint = () => {
   const [members, setMembers] = useState();
   const [hintText, setHintText] = useState("");
   const navigate = useNavigate();
+  const { state, pathname } = useLocation();
 
-  const { state } = useLocation();
-  const { roomData } = state;
+  let roomData;
+  if (state) {
+    roomData = state.roomData;
+    console.log(roomData);
+  }
+
+  const { invitationCode } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,7 +121,25 @@ export const UserPoint = () => {
       }
       setLoading(false);
     };
-    fetchData();
+
+    if (
+      pathname.indexOf("/invitation-link") == 0 &&
+      getCookie("refreshToken") == null
+    ) {
+      navigate("/");  // 새로 로그인 -> 방으로 가는 컴포넌트 구현해야함
+    } else if (pathname.indexOf("/invitation-link") == 0) {
+      const response = LinkInvite(invitationCode);
+      console.log(response)
+      // console.log(invitationCode);
+    } else if (getCookie("refreshToken") == null) {
+      navigate("/");
+    } else if (!roomData) {
+      // roomData 가 없을 때
+      navigate("/home");
+    } else {
+      
+      fetchData();
+    }
   }, []);
 
   const handleUserSelect = (user) => {
