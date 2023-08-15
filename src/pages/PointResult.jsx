@@ -13,39 +13,38 @@ import { getAccessToken, getUserInfo } from "../api/auth";
 import QuestRegistBtn from "../components/QuestionRegistrationBtn/QuestRegistBtn";
 import { roomLink } from "../api/room";
 
+const dumydata = [
+  { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
+  { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
+  { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
+];
+
 const UserResult = styled.section`
-  width: 759px;
-  height: 268px;
-  flex-shrink: 0;
+  max-width: 759px;
+  min-width: 280px;
+  width: 80%;
+  height: 250px;
+  flex-shrink: 1;
   border-radius: 30px;
   background: var(--white, #fff);
   padding: 25.5px;
   margin: 0 auto;
-  text-align: center;
-  /* display: flex;
-  flex-direction: column;  */
-  /* align-items: center; */
-  position: relative; /* 추가: UserResult를 바닥 기준으로 정렬하기 위해 */
+  display: flex;
+  flex-direction: column;
 `;
 
 const Bottom = styled.div`
-  width: 759px;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  bottom: 0;
+  padding: 0 15px 0 15px;
+  margin-top: 75.14px;
+  text-align: center;
 `;
 
 const MyResultBtn = styled.button`
-  display: inline-flex;
   padding: 7px 17px 9px 17px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
   border-radius: 999px;
   border: 2px solid var(--orangered, #ff2301);
   background: transparent;
-
+  margin-top: 13px;
   color: var(--orangered, #ff2301);
   text-align: center;
 
@@ -99,12 +98,10 @@ const Buttons = styled.div`
   display: flex;
   justify-content: center;
   gap: 18px;
-  // @media (min-width: 835px) and (max-width: 1200px) {
-  //   margin-bottom: 54px;
-  // }
-  // @media screen and (max-width: 834px) {
-  //   margin-bottom: 28px;
-  // }
+`;
+
+const TopSection = styled.div`
+  height: 87px;
 `;
 
 export const PointResult = ({ room }) => {
@@ -132,6 +129,7 @@ export const PointResult = ({ room }) => {
           }
         );
         setMembers(response.data.result.members);
+        setMembers(dumydata);
         setTargetUser(response.data.result.targetUser);
         setQuestion(response.data.result.question);
       } catch (e) {
@@ -161,8 +159,9 @@ export const PointResult = ({ room }) => {
   const createQuestionBtn = () => {
     navigate("/question", { state: { roomData } });
   };
+  console.log(members);
   return (
-    <Fragment>
+    <Fragment style={{ position: "absolute" }}>
       <Header />
       <Question>{question}</Question>
       <Buttons>
@@ -170,9 +169,11 @@ export const PointResult = ({ room }) => {
         <LinkCopy onClick={LinkHandler}>링크로 초대</LinkCopy>
       </Buttons>
       <UserResult>
-        {members.map((user, index) => (
-          <TopUser key={user.userId} index={index} user={user} />
-        ))}
+        <TopSection>
+          {members.map((user, index) => (
+            <TopUser key={user.userId} index={index} user={user} />
+          ))}
+        </TopSection>
         <Bottom>
           {targetUser !== "" && <MySelf user={targetUser} />}
           <MyResultBtn onClick={MyResultHandler}>나의 결과 보기</MyResultBtn>
