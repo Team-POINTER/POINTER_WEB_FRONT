@@ -29,7 +29,8 @@ function App() {
           <Route path="point-result" element={<PointResult />} />
           <Route path="setting" element={<SettingPage />} />
           <Route path="result-list" element={<MyResultList />} />
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="invitation-link/:invitationCode" element={<UserPoint />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </Provider>
