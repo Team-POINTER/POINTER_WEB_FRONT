@@ -39,9 +39,11 @@ const PointBtn = styled.button`
 const Container = styled.div`
   margin: auto;
   display: flex;
+  padding: 5px;
   height: 70vh;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 const StyledUl = styled.ul`
@@ -51,15 +53,15 @@ const StyledUl = styled.ul`
   display: grid;
   gap: 16px;
 
-  @media (min-width: 1020px) {
+  @media (min-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (min-width: 670px) and (max-width: 1019px) {
+  @media (min-width: 834px) and (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 669px) {
+  @media (max-width: 670px) {
     grid-template-columns: 1fr;
   }
 `;

@@ -1,0 +1,77 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(12px);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  animation: slide-down 300ms ease-out forwards;
+  width: 331px;
+  height: 193px;
+  flex-shrink: 0;
+  background: #fff;
+
+  /* 1 */
+  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commentBox {
+  color: var(--gray-70, #605f5f);
+  height: 130px;
+  /* M 18 */
+  font-size: 18px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.returnButton {
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--black, #000);
+  font-size: 18px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  height: 63px;
+  width: inherit;
+}
+
+button:active {
+  background-color: rgba(148, 148, 148, 0.2);
+}
+
+hr {
+  width: 300px;
+  margin: 0;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

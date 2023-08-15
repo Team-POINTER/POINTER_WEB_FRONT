@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
+import Card from "../../../UI/Card/Card";
 import ReactDOM from "react-dom";
 import styles from "./SetRoomNameModal.module.css";
-import { createRoom } from "../../api/room";
 import { useNavigate } from "react-router-dom";
+import { createRoom } from "../../../api/room";
 
 const Backdrop = (props) => {
   return <div className={styles.backdrop} onClick={props.onConfirm} />;

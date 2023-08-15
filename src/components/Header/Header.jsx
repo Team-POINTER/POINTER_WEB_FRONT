@@ -5,7 +5,7 @@ import { Link, Router, useLocation } from "react-router-dom";
 import { AuthService } from "../../service/AuthService";
 import { getCookie } from "../../function/cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { SetRoomNameModal } from "../../UI/SetRoomNameModal/SetRoomNameModal";
+import { SetRoomNameModal } from "../Modal/SetRoomNameModal/SetRoomNameModal";
 
 export const Header = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
