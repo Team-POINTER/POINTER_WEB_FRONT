@@ -9,7 +9,7 @@ const TopUserContainer = styled.div`
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 160%;
+  line-height: 180%;
 `;
 
 const UserInfo = styled.div`
