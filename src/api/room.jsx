@@ -72,3 +72,14 @@ export const myResultList = async (roomId) => {
     })
     .then(res => res.data.result);
 };
+
+export const voteOrNot = async (questionId) => {
+  return axios
+    .get(`${process.env.REACT_APP_BASE_URL}/votes/check/${questionId}`,{
+      headers: {
+        Authorization: "Bearer " + getCookie("refreshToken"),
+      },
+    })
+    .then(res => res.data.result);
+};
+

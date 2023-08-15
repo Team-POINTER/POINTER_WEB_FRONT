@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUpdateRoomForm } from "../../modules/room";
 import { EditRoomName } from "./EditRoomName";
 import { useNavigate } from "react-router-dom";
-import { leaveRoom } from "../../api/room";
+import { leaveRoom, voteOrNot } from "../../api/room";
 
 const Wrap = styled.div`
   width: 303.1px;
@@ -239,8 +239,14 @@ export const RoomBox = ({ roomData }) => {
     navigate("/result");
   };
 
-  const moveToRoom = () => {
-    navigate("/user-point", { state: { roomData } });
+  const moveToRoom = async () => {
+    const res = await voteOrNot(roomData.questionId);
+    console.log(res);
+    if (res.vote === false) {
+      navigate("/point-result", { state: { roomData } });
+    } else {
+      navigate("/user-point", { state: { roomData } });
+    }
   };
 
   const shortenTitle = (title) => {
