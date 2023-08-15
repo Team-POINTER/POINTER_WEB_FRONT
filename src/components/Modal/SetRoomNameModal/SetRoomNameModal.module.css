@@ -96,8 +96,9 @@
   color: var(--orangered, #ff2301);
 }
 
-hr {
+.modal hr {
   margin: 23.21px 15px 0px 15px;
+  width: 328px;
   height: 1px;
   border: 0;
   background: rgb(146, 146, 146, 0.4);
