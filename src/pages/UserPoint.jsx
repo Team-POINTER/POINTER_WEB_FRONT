@@ -12,7 +12,7 @@ import { getAccessToken } from "../api/auth";
 import { useSelector } from "react-redux";
 import { voting } from "../api/vote";
 import { LinkInvite } from "../api/invite";
-import { voteOrNot } from "../api/room";
+import { voteOrNot } from "../api/vote";
 
 const Wrap = styled.div`
   margin: 0 auto;

@@ -8,7 +8,8 @@ import { useDispatch } from "react-redux";
 import { setUpdateRoomForm } from "../../modules/room";
 import { EditRoomName } from "./EditRoomName";
 import { useNavigate } from "react-router-dom";
-import { leaveRoom, voteOrNot } from "../../api/room";
+import { leaveRoom } from "../../api/room";
+import { voteOrNot } from "../../api/vote";
 
 const Wrap = styled.div`
   width: 303.1px;
