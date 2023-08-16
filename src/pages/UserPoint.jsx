@@ -93,14 +93,13 @@ export const UserPoint = () => {
   const [hintText, setHintText] = useState("");
   const navigate = useNavigate();
   const { state, pathname } = useLocation();
+  const { invitationCode } = useParams();
 
   let roomData;
   if (state) {
     roomData = state.roomData;
-    console.log(roomData);
+    // console.log(roomData);
   }
-
-  const { invitationCode } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -126,7 +125,7 @@ export const UserPoint = () => {
     const inviteFetchData = async (invitationCode) => {
       try {
         const response = await LinkInvite(invitationCode);
-        console.log(response);
+        // console.log(response);
         setMembers(response.data.data.roomMembers);
         setQuestion(response.data.data.question);
       } catch(e) {
@@ -134,17 +133,18 @@ export const UserPoint = () => {
       }
     }
 
-    const voteOrNotFetchData = async (question) => {
+    const voteOrNotFetchData = async () => {
       try {
         const response = await voteOrNot(roomData.questionId);
-        console.log(response.vote);
-        if(response.vote == false) {
+        // console.log(response.vote);
+        if(response.vote === true) {
           navigate('/home');
         }
       } catch(e) {
         console.log(e);
       }
     }
+    
     if (
       pathname.indexOf("/invitation-link") == 0 &&
       getCookie("refreshToken") == null

@@ -243,9 +243,9 @@ export const RoomBox = ({ roomData }) => {
     const res = await voteOrNot(roomData.questionId);
     console.log(res);
     if (res.vote === false) {
-      navigate("/point-result", { state: { roomData } });
-    } else {
       navigate("/user-point", { state: { roomData } });
+    } else {
+      navigate("/point-result", { state: { roomData } });
     }
   };
 
