@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthService } from "../service/AuthService";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { getCookie } from "../function/cookie";
 
 const Nickname = styled.h3`
   width: 80%;
@@ -19,11 +21,14 @@ const Nickname = styled.h3`
 
 const Wrap = styled.div`
   display: flex;
-  width: 100vw;
   height: 852px;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+`;
+
+const Hr = styled.hr`
+  width: 80%;
 `;
 
 const Table = styled.button`
@@ -39,7 +44,6 @@ const Table = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: 170%; /* 27.2px */
-  border-bottom: 1px solid rgb(255, 255, 255, 0.5);
 `;
 /*
 const Line = styled.div`
@@ -59,20 +63,37 @@ export const SettingPage = () => {
       navigate("/");
     });
   };
+  const UserDeleteHandler = () => {
+    console.log(1);
+    axios.delete(`${process.env.REACT_APP_BASE_URL}/user/resign`, {
+      headers: {
+        Authorization: "Bearer " + getCookie("refreshToken"),
+      },
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(e => {
+      console.log(e);
+    })
+  }
   return (
     <>
       <Header />
       <Wrap>
-        <Nickname> {userInfo && userInfo.userName + "님"}</Nickname>
+        <Nickname> {userInfo && userInfo.userName + " 님"}</Nickname>
         <Table>
           <img src="/img/Moon.png" alt="Moon" /> <p>모드 변경</p>
         </Table>
+        <Hr />
         <Table>
           <p onClick={logout}>로그아웃</p>
         </Table>
-        <Table>
+        <Hr />
+        <Table onClick={UserDeleteHandler}>
           <p>회원 탈퇴</p>
         </Table>
+        <Hr />
       </Wrap>
     </>
   );
