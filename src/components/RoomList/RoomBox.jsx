@@ -1,5 +1,5 @@
 import { Backdrop } from "@mui/material";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import Icon from "../../icon/Icon";
 import IconBox from "../../icon/IconBox";
@@ -15,7 +15,7 @@ const Wrap = styled.div`
   height: 126.75px;
   background: #ffffff;
   border-radius: 10px;
-  padding: 13.7px 25.3px 16.5px 21.6px;
+  padding: 13.7px 15.3px 16.5px 21.6px;
 `;
 
 const Title = styled.div`
@@ -55,7 +55,7 @@ const Bottom = styled.div`
 `;
 
 const Cnt = styled.div`
-  width: 23px;
+  width: 27px;
   height: 20px;
   font-family: "Noto Sans KR";
   font-style: normal;
@@ -235,10 +235,6 @@ export const RoomBox = ({ roomData }) => {
     setEditNameOpen(true);
   };
 
-  const moveToQuestionResult = () => {
-    navigate("/result");
-  };
-
   const moveToRoom = async () => {
     const res = await voteOrNot(roomData.questionId);
     console.log(res);
@@ -272,19 +268,15 @@ export const RoomBox = ({ roomData }) => {
 
         <Bottom>
           <BottomLeft>
-            <Cnt style={{ marginRight: "11px" }}>{roomData.memberCnt}명</Cnt>
-            <IconBox style={{ marginRight: "3px" }}>
-              <Icon icon="writerMark" />
-            </IconBox>
-            <Writer>
-              {roomData.voted && roomData.topUserName && roomData.topUserName}님
-            </Writer>
-            <span
-              style={{ fontSize: "12px", cursor: "pointer" }}
-              onClick={moveToQuestionResult}
-            >
-              결과보기
-            </span>
+            <Cnt style={{ marginRight: "5px" }}>{roomData.memberCnt}명</Cnt>
+            {roomData.topUserName && (
+              <Fragment>
+                <IconBox style={{ marginRight: "3px" }}>
+                  <Icon icon="writerMark" />
+                </IconBox>
+                <Writer>{roomData.voted && roomData.topUserName}님</Writer>
+              </Fragment>
+            )}
           </BottomLeft>
           <IconBox onClick={handleOpen}>
             <Icon icon="roomEdit" />

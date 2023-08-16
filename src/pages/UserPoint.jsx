@@ -94,6 +94,7 @@ export const UserPoint = () => {
   const navigate = useNavigate();
   const { state, pathname } = useLocation();
   const { invitationCode } = useParams();
+  const { accessToken, userInfo } = useSelector((state) => state.member);
 
   let roomData;
   if (state) {
@@ -121,35 +122,35 @@ export const UserPoint = () => {
       }
       setLoading(false);
     };
-    
+
     const inviteFetchData = async (invitationCode) => {
       try {
         const response = await LinkInvite(invitationCode);
         // console.log(response);
         setMembers(response.data.data.roomMembers);
         setQuestion(response.data.data.question);
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
-    }
+    };
 
     const voteOrNotFetchData = async () => {
       try {
         const response = await voteOrNot(roomData.questionId);
         // console.log(response.vote);
-        if(response.vote === true) {
-          navigate('/home');
+        if (response.vote === true) {
+          navigate("/home");
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
-    }
-    
+    };
+
     if (
       pathname.indexOf("/invitation-link") == 0 &&
       getCookie("refreshToken") == null
     ) {
-      navigate("/");  // 새로 로그인 -> 방으로 가는 컴포넌트 구현해야함
+      navigate("/"); // 새로 로그인 -> 방으로 가는 컴포넌트 구현해야함
     } else if (pathname.indexOf("/invitation-link") == 0) {
       inviteFetchData(invitationCode);
     } else if (getCookie("refreshToken") == null) {
@@ -160,7 +161,7 @@ export const UserPoint = () => {
       voteOrNotFetchData();
       fetchData();
     }
-  }, []);
+  }, [accessToken]);
 
   const handleUserSelect = (user) => {
     if (selectedUsers.includes(user.name)) {
@@ -181,7 +182,7 @@ export const UserPoint = () => {
     }
     voting({
       questionId: roomData.questionId,
-      userId: roomData.userId,
+      userId: userInfo.userId,
       votedUserIds: selectedUserIds,
       hint: hintText,
     });
