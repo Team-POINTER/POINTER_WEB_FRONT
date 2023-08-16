@@ -13,11 +13,11 @@ import { getAccessToken, getUserInfo } from "../api/auth";
 import QuestRegistBtn from "../components/QuestionRegistrationBtn/QuestRegistBtn";
 import { roomLink } from "../api/room";
 
-const dumydata = [
-  { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
-  { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
-  { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
-];
+// const dumydata = [
+//   { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
+//   { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
+//   { userName: "곽민섭", votedMemberCnt: 3, allVoteCnt: 8 },
+// ];
 
 const UserResult = styled.section`
   max-width: 759px;
@@ -118,7 +118,7 @@ export const PointResult = ({ room }) => {
       try {
         const user = await getAccessToken();
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/votes/${roomData.roomId}`,
+          `${process.env.REACT_APP_BASE_URL}/votes/${roomData.questionId}`,
           {
             headers: {
               Authorization: `Bearer ${user.accessToken}`,
@@ -126,7 +126,7 @@ export const PointResult = ({ room }) => {
           }
         );
         setMembers(response.data.result.members);
-        setMembers(dumydata);
+        // setMembers(dumydata);
         setTargetUser(response.data.result.targetUser);
         setQuestion(response.data.result.question);
       } catch (e) {
@@ -144,6 +144,7 @@ export const PointResult = ({ room }) => {
 
   const LinkHandler = async () => {
     try {
+      console.log(roomData.roomId);
       const data = await roomLink(roomData.roomId);
       await navigator.clipboard.writeText(data);
       alert("클립보드에 복사되었습니다.");
@@ -162,7 +163,7 @@ export const PointResult = ({ room }) => {
   }
 
   return (
-    <Fragment style={{ position: "absolute" }}>
+    <Fragment>
       <Header />
       <Question>{question}</Question>
       <Buttons>
