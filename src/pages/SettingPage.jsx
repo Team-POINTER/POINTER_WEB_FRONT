@@ -86,8 +86,8 @@ export const SettingPage = () => {
           <img src="/img/Moon.png" alt="Moon" /> <p>모드 변경</p>
         </Table>
         <Hr />
-        <Table>
-          <p onClick={logout}>로그아웃</p>
+        <Table onClick={logout}>
+          <p>로그아웃</p>
         </Table>
         <Hr />
         <Table onClick={UserDeleteHandler}>
