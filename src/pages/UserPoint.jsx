@@ -12,7 +12,7 @@ import { getAccessToken } from "../api/auth";
 import { useSelector } from "react-redux";
 import { voting } from "../api/vote";
 import { LinkInvite } from "../api/invite";
-import { voteOrNot } from "../api/room";
+import { voteOrNot } from "../api/vote";
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -28,6 +28,9 @@ const PointBtn = styled.button`
       ? css`
           opacity: 0.5;
           cursor: default;
+          &:active {
+            background-color: rgb(255, 35, 1, 1);
+          }
         `
       : css`
           &:active {
@@ -171,15 +174,15 @@ export const UserPoint = () => {
     } else {
       setSelectedUsers((prev) => [...prev, user.name]);
       setSelectedUserIds((prev) => [...prev, user.userId]);
+      if (!hintText.length) {
+        document.getElementById("hintInputField").focus();
+        return;
+      }
     }
   };
 
   const handlePointBtnClick = () => {
     if (!selectedUsers.length) return;
-    if (!hintText.length) {
-      document.getElementById("hintInputField").focus();
-      return;
-    }
     voting({
       questionId: roomData.questionId,
       userId: userInfo.userId,

@@ -6,6 +6,7 @@
   gap: 8px;
   border-radius: 999px;
   background: var(--orangered, #ff2301);
+  opacity: 0.5;
   color: #fff;
   text-align: center;
 
@@ -16,7 +17,8 @@
   font-weight: 700;
   line-height: 150%;
   padding-top: 10px;
-
-  cursor: pointer;
 }
 
+.btn:active {
+  background: var(--orangered, #ff2301);
+}
