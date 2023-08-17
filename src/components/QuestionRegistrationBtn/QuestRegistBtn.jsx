@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./QuestRegistBtn.module.css";
-import { useNavigate } from "react-router-dom";
 
 const QuestRegistBtn = (props) => {
   return (
