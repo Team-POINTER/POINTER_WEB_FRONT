@@ -12,13 +12,29 @@ export const whetherQuestion = ({ roomId }) => {
     .then((res) => res.data.result);
 };
 
-export const createQuestion = ({roomId, content}) => {
-  return axios.post(`${process.env.REACT_APP_BASE_URL}/questions`, {
-    roomId,
-    content
-  }, {
+export const createQuestion = ({ roomId, content }) => {
+  return axios
+    .post(
+      `${process.env.REACT_APP_BASE_URL}/questions`,
+      {
+        roomId,
+        content,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + getCookie("refreshToken"),
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+    });
+};
+
+export const getQuestion = async ({ roomId }) => {
+  return axios.get(`${process.env.REACT_APP_BASE_URL}/room/${roomId}`, {
     headers: {
-      Authorization: "Bearer " + getCookie("refreshToken"),
+      Authorization: `Bearer ${getCookie("refreshToken")}`,
     },
-  }).then(res => {console.log(res)})
-}
+  });
+};
