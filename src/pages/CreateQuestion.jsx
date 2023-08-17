@@ -198,7 +198,6 @@ export const CreateQuestion = () => {
   if (state) {
     roomData = state.roomData;
   }
-  console.log(roomData);
   const handleClose = () => {
     setOpen(false);
   };
@@ -208,7 +207,7 @@ export const CreateQuestion = () => {
       // 다른 사림이 이미 질문을 등록했는지 판단
       const response = await getQuestion(roomData);
       // 이미 질문 등록을 한 경우
-      if (roomData.questionId != response.questionId) {
+      if (roomData.questionId != response.data.data.questionId) {
         setOpen(true);
         return;
       }
