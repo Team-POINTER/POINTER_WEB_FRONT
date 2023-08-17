@@ -197,22 +197,20 @@ export const CreateQuestion = () => {
   let roomData;
   if (state) {
     roomData = state.roomData;
-  }  
+  }
   console.log(roomData);
   const handleClose = () => {
     setOpen(false);
   };
   const handleOpen = () => {
-    
-
     // 질문 등록 가능 여부 판단 함수
     const questionOrNot = async () => {
-      /* 다른 사림이 이미 질문을 등록했는지 판단하는 코드 자리 */
+      // 다른 사림이 이미 질문을 등록했는지 판단
       const response = await getQuestion(roomData);
       // 이미 질문 등록을 한 경우
-      if(roomData.questionId != response.questionId) {
+      if (roomData.questionId != response.questionId) {
         setOpen(true);
-        return ;
+        return;
       }
       const res = await whetherQuestion(roomData); // 생성일로부터 24시간이 지난 시간
       const limitedDate = new Date(roomData.limitedAt); // 지금 시각
@@ -220,6 +218,7 @@ export const CreateQuestion = () => {
       // 모든 사람이 투표를 완료 || 등록 가능 사간이 되었을 때
       if (res || limitedDate - today <= 0) {
         createQuestion({ roomId: roomData.roomId, content: questionText });
+        navigate("/user-point", { state: { roomData } });
       } else {
         setInstallModal(true);
       }
@@ -241,7 +240,7 @@ export const CreateQuestion = () => {
 
   const returnToRoom = () => {
     handleClose();
-    navigate("/home/user-point");
+    navigate("/user-point", { state: { roomData } });
   };
 
   const returnToMain = () => {
@@ -314,11 +313,15 @@ export const CreateQuestion = () => {
         </InputBox>
       </Content>
       <Bottom>
-        {questionText.length > 0 ? <QuestRegistBtn onClickHandler={handleOpen} /> : <QuestNonRegistBtn />}
+        {questionText.length > 0 ? (
+          <QuestRegistBtn onClickHandler={handleOpen} />
+        ) : (
+          <QuestNonRegistBtn />
+        )}
         <LinkCopy>링크로 초대</LinkCopy>
       </Bottom>
       {open && (
-        <BasicModal 
+        <BasicModal
           onConfirm={returnToRoom}
           title={"다른 사람이 질문을 이미 등록했습니다."}
           returnComment={"돌아가기"}
