@@ -133,7 +133,6 @@ export const UserPoint = () => {
     const voteOrNotFetchData = async () => {
       try {
         const response = await voteOrNot(roomData.questionId);
-        // console.log(response.vote);
         if (response.vote === true) {
           navigate("/home");
         }

@@ -198,6 +198,7 @@ export const CreateQuestion = () => {
   if (state) {
     roomData = state.roomData;
   }
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -215,9 +216,21 @@ export const CreateQuestion = () => {
       const limitedDate = new Date(roomData.limitedAt); // 지금 시각
       const today = new Date();
       // 모든 사람이 투표를 완료 || 등록 가능 사간이 되었을 때
+      
       if (res || limitedDate - today <= 0) {
-        createQuestion({ roomId: roomData.roomId, content: questionText });
-        navigate("/user-point", { state: { roomData } });
+        const result = await createQuestion({
+          roomId: roomData.roomId,
+          content: questionText,
+        });
+        navigate("/user-point", {
+          state: {
+            roomData: {
+              ...roomData,
+              questionId: result.questionId,
+              question: questionText,
+            },
+          },
+        });
       } else {
         setInstallModal(true);
       }
