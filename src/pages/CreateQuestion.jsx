@@ -4,7 +4,11 @@ import Icon from "../icon/Icon";
 import IconBox from "../icon/IconBox";
 import { useEffect } from "react";
 import { Backdrop } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import QuestRegistBtn from "../components/QuestionRegistrationBtn/QuestRegistBtn";
+import QuestNonRegistBtn from "../components/QuestionRegistrationBtn/NonRegistBtn/QuestNonRegistBtn";
+import { createQuestion, getQuestion, whetherQuestion } from "../api/question";
+import BasicModal from "../components/Modal/BasicModal/BasicModal";
 
 const Wrap = styled.div`
   width: 100%;
@@ -181,61 +185,46 @@ const UserName = styled.div`
   cursor: pointer;
 `;
 
-const AlreadyCreatedAlert = styled.div`
-  width: 331px;
-  height: 193px;
-  flex-shrink: 0;
-  border-radius: 25px;
-  background: #fff;
-
-  /* 1 */
-  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.1);
-`;
-
-const CommentBox = styled.div`
-  color: var(--gray-70, #605f5f);
-  text-align: center;
-  height: 130px;
-  /* M 18 */
-  font-size: 18px;
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 150%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ReturnButton = styled.div`
-  cursor: pointer;
-  color: var(--black, #000);
-  text-align: center;
-  font-size: 18px;
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 150%;
-`;
-
-const BoxHr = styled.div`
-  width: 100%;
-  height: 1px;
-  flex-shrink: 0;
-  background-color: #929292;
-  margin-bottom: 16px;
-`;
-
-export const CreateQuestion = ({}) => {
+export const CreateQuestion = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [open, setOpen] = useState(false);
+  const [InstallModal, setInstallModal] = useState(false);
+  const [questionText, setQuestionText] = useState("");
+
   const [editNameOpen, setEditNameOpen] = useState(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
+  let roomData;
+  if (state) {
+    roomData = state.roomData;
+  }
+  console.log(roomData);
   const handleClose = () => {
     setOpen(false);
   };
   const handleOpen = () => {
-    setOpen(true);
+    // 질문 등록 가능 여부 판단 함수
+    const questionOrNot = async () => {
+      // 다른 사림이 이미 질문을 등록했는지 판단
+      const response = await getQuestion(roomData);
+      // 이미 질문 등록을 한 경우
+      if (roomData.questionId != response.questionId) {
+        setOpen(true);
+        return;
+      }
+      const res = await whetherQuestion(roomData); // 생성일로부터 24시간이 지난 시간
+      const limitedDate = new Date(roomData.limitedAt); // 지금 시각
+      const today = new Date();
+      // 모든 사람이 투표를 완료 || 등록 가능 사간이 되었을 때
+      if (res || limitedDate - today <= 0) {
+        createQuestion({ roomId: roomData.roomId, content: questionText });
+        navigate("/user-point", { state: { roomData } });
+      } else {
+        setInstallModal(true);
+      }
+    };
+    questionOrNot();
+    // setOpen(true);
   };
 
   const handleResize = () => {
@@ -251,12 +240,20 @@ export const CreateQuestion = ({}) => {
 
   const returnToRoom = () => {
     handleClose();
-    navigate("/home/user-point");
+    navigate("/user-point", { state: { roomData } });
   };
 
   const returnToMain = () => {
     navigate("/home");
   };
+
+  const goToAppStore = () => {
+    window.open("https://www.apple.com/kr/app-store/", "_blank");
+  };
+
+  const clickBackHandler = () => setInstallModal(false);
+
+  const textHandler = (e) => setQuestionText(e.target.value);
 
   return (
     <Wrap>
@@ -300,6 +297,8 @@ export const CreateQuestion = ({}) => {
               rows="2"
               maxLength={45}
               placeholder="질문을 입력하세요."
+              value={questionText}
+              onChange={textHandler}
             />
           ) : (
             <textarea
@@ -307,33 +306,36 @@ export const CreateQuestion = ({}) => {
               rows="4"
               maxLength={45}
               placeholder="질문을 입력하세요."
+              value={questionText}
+              onChange={textHandler}
             />
           )}
         </InputBox>
       </Content>
       <Bottom>
-        <RegisterBtn onClick={handleOpen}>
-          질문 등록하기<span>22:22:11</span>
-        </RegisterBtn>
+        {questionText.length > 0 ? (
+          <QuestRegistBtn onClickHandler={handleOpen} />
+        ) : (
+          <QuestNonRegistBtn />
+        )}
         <LinkCopy>링크로 초대</LinkCopy>
       </Bottom>
-
-      <Backdrop
-        sx={{
-          zIndex: 3,
-          background: "rgba(0, 0, 0, 0.5)",
-          backdropFilter: "blur(20px)",
-        }}
-        open={open}
-      >
-        {open && (
-          <AlreadyCreatedAlert>
-            <CommentBox>다른 사람이 질문을 이미 등록했습니다.</CommentBox>
-            <BoxHr />
-            <ReturnButton onClick={returnToRoom}>돌아가기</ReturnButton>
-          </AlreadyCreatedAlert>
-        )}
-      </Backdrop>
+      {open && (
+        <BasicModal
+          onConfirm={returnToRoom}
+          title={"다른 사람이 질문을 이미 등록했습니다."}
+          returnComment={"돌아가기"}
+          onClickBack={clickBackHandler}
+        />
+      )}
+      {InstallModal && (
+        <BasicModal
+          onConfirm={goToAppStore}
+          title={"아직 질문을 등록할 시간이 아니에요!"}
+          returnComment={"앱에서 시간 확인"}
+          onClickBack={clickBackHandler}
+        />
+      )}
     </Wrap>
   );
 };

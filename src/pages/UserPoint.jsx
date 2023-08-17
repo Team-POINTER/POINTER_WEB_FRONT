@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { voting } from "../api/vote";
 import { LinkInvite } from "../api/invite";
 import { voteOrNot } from "../api/vote";
+import { getQuestion } from "../api/question";
 
 const Wrap = styled.div`
   margin: 0 auto;
@@ -109,15 +110,7 @@ export const UserPoint = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const user = await getAccessToken();
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/room/${roomData.roomId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.accessToken}`,
-            },
-          }
-        );
+        const response = await getQuestion(roomData);
         setMembers(response.data.data.roomMembers);
         setQuestion(response.data.data.question);
       } catch (e) {
