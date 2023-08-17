@@ -28,6 +28,9 @@ const PointBtn = styled.button`
       ? css`
           opacity: 0.5;
           cursor: default;
+          &:active {
+            background-color: rgb(255, 35, 1, 1);
+          }
         `
       : css`
           &:active {
@@ -171,15 +174,15 @@ export const UserPoint = () => {
     } else {
       setSelectedUsers((prev) => [...prev, user.name]);
       setSelectedUserIds((prev) => [...prev, user.userId]);
+      if (!hintText.length) {
+        document.getElementById("hintInputField").focus();
+        return;
+      }
     }
   };
 
   const handlePointBtnClick = () => {
     if (!selectedUsers.length) return;
-    if (!hintText.length) {
-      document.getElementById("hintInputField").focus();
-      return;
-    }
     voting({
       questionId: roomData.questionId,
       userId: userInfo.userId,
