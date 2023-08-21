@@ -6,6 +6,8 @@ import { Backdrop } from "@mui/material";
 import { setUpdateRoomForm } from "../../modules/room";
 import { useEffect } from "react";
 import { RoomService } from "../../service/RoomService";
+import styles from "../../components/Modal/SetRoomNameModal/SetRoomNameModal.module.css";
+import Card from "../../UI/Card/Card";
 
 const Wrap = styled.div`
   position: absolute;
@@ -130,8 +132,8 @@ export const EditRoomName = ({
   const changeRoomName = (e) => {
     const { name, value } = e.target;
 
-    if (value.length > 15) {
-      value.substring(0, 16);
+    if (value.length >= 15) {
+      value.substring(0, 15);
     }
     dispatch(
       setUpdateRoomForm({
@@ -156,43 +158,73 @@ export const EditRoomName = ({
       }}
       open={editNameOpen}
     >
-      {updateRoomForm.roomNm && (
-        <Wrap>
-          <Container>
-            <Box>
-              <Title>룸 이름 편집</Title>
-              <Comment>
-                {"'" + roomNm + "'의 새로운 이름을 입력하세요."}
-              </Comment>
-              <InputBox>
-                <Input
-                  name={"roomNm"}
-                  value={updateRoomForm.roomNm}
-                  maxLength={15}
-                  onChange={changeRoomName}
-                />
-                <InputCnt>{updateRoomForm.roomNm.length + " / " + 15}</InputCnt>
-              </InputBox>
-              <Bottom>
-                <BottomBtn
-                  onClick={() => setEditNameOpen(false)}
-                  style={{ color: theme.colors.grayscale_60 }}
-                >
-                  취소
-                </BottomBtn>
-                <BottomBtn
-                  onClick={update}
-                  style={{
-                    color: theme.colors.orangered,
-                    borderLeft: "1px solid" + theme.colors.grayscale_60,
-                  }}
-                >
-                  완료
-                </BottomBtn>
-              </Bottom>
-            </Box>
-          </Container>
-        </Wrap>
+      {updateRoomForm.roomNm.length >= 0 && (
+        <Card className={styles.modal}>
+          <header className={styles.header}>
+            <p>룸 이름 편집</p>
+          </header>
+          <div className={styles.content}>
+            <input
+              name={"roomNm"}
+              value={updateRoomForm.roomNm}
+              maxLength={15}
+              size={15}
+              onChange={changeRoomName}
+            />
+            <span
+              style={updateRoomForm.roomNm.length >= 15 ? { color: "red" } : {}}
+            >
+              {updateRoomForm.roomNm.length + " / " + 15}
+            </span>
+          </div>
+          <hr />
+          <footer className={styles.actions}>
+            <button type="button" onClick={() => setEditNameOpen(false)}>
+              취소
+            </button>
+            <div className={styles.updown} />
+            <button type="submit" onClick={update}>
+              완료
+            </button>
+          </footer>
+        </Card>
+
+        // <Wrap>
+        //   <Container>
+        //     <Box>
+        //       <Title>룸 이름 편집</Title>
+        //       <Comment>
+        //         {"'" + roomNm + "'의 새로운 이름을 입력하세요."}
+        //       </Comment>
+        //       <InputBox>
+        //         <Input
+        //           name={"roomNm"}
+        //           value={updateRoomForm.roomNm}
+        //           maxLength={15}
+        //           onChange={changeRoomName}
+        //         />
+        //         <InputCnt>{updateRoomForm.roomNm.length + " / " + 15}</InputCnt>
+        //       </InputBox>
+        //       <Bottom>
+        //         <BottomBtn
+        //           onClick={() => setEditNameOpen(false)}
+        //           style={{ color: theme.colors.grayscale_60 }}
+        //         >
+        //           취소
+        //         </BottomBtn>
+        //         <BottomBtn
+        //           onClick={update}
+        //           style={{
+        //             color: theme.colors.orangered,
+        //             borderLeft: "1px solid" + theme.colors.grayscale_60,
+        //           }}
+        //         >
+        //           완료
+        //         </BottomBtn>
+        //       </Bottom>
+        //     </Box>
+        //   </Container>
+        // </Wrap>
       )}
     </Backdrop>
   );
