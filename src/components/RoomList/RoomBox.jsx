@@ -279,7 +279,7 @@ export const RoomBox = ({ roomData }) => {
               </Fragment>
             )}
           </BottomLeft>
-          <IconBox onClick={handleOpen}>
+          <IconBox style={{ width: "30px" }} onClick={handleOpen}>
             <Icon icon="roomEdit" />
           </IconBox>
         </Bottom>
