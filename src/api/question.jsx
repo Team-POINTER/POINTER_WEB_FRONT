@@ -26,9 +26,7 @@ export const createQuestion = ({ roomId, content }) => {
         },
       }
     )
-    .then((res) => {
-      console.log(res);
-    });
+    .then((res) => res.data.result);
 };
 
 export const getQuestion = async ({ roomId }) => {
