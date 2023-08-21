@@ -69,7 +69,13 @@ const Cnt = styled.div`
 `;
 
 const Writer = styled.div`
-  width: 51px;
+  min-width: 51px;
+  max-width: 100px;
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   height: 20px;
   font-family: "Noto Sans KR";
   font-style: normal;
@@ -275,7 +281,9 @@ export const RoomBox = ({ roomData }) => {
                 <IconBox style={{ marginRight: "3px" }}>
                   <Icon icon="writerMark" />
                 </IconBox>
-                <Writer>{roomData.voted && roomData.topUserName}님</Writer>
+                <Writer>
+                  <span>{roomData.voted && roomData.topUserName}</span>님
+                </Writer>
               </Fragment>
             )}
           </BottomLeft>
