@@ -6,10 +6,10 @@ const app = express();
 const PORT = 80;
 const __dirname = path.resolve();
 
-app.use(express.static(path.join(__dirname, "../front/build")));
+app.use(express.static(path.join(__dirname, "../build")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../front/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
 const server = app.listen(PORT, () => {
@@ -17,5 +17,5 @@ const server = app.listen(PORT, () => {
 });
 
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../front/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
