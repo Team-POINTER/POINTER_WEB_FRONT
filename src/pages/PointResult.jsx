@@ -23,7 +23,7 @@ const UserResult = styled.section`
   max-width: 759px;
   min-width: 280px;
   width: 80%;
-  height: 250px;
+  min-height: 250px;
   flex-shrink: 1;
   border-radius: 30px;
   background: var(--white, #fff);
@@ -35,7 +35,7 @@ const UserResult = styled.section`
 
 const Bottom = styled.div`
   padding: 0 15px 0 15px;
-  margin-top: 75.14px;
+  margin-top: 48px;
   text-align: center;
 `;
 
@@ -101,7 +101,7 @@ const Buttons = styled.div`
 `;
 
 const TopSection = styled.div`
-  height: 87px;
+  // height: 87px;
 `;
 
 export const PointResult = ({ room }) => {
