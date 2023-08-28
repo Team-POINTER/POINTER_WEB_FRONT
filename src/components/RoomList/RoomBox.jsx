@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUpdateRoomForm } from "../../modules/room";
 import { EditRoomName } from "./EditRoomName";
 import { useNavigate } from "react-router-dom";
-import { leaveRoom } from "../../api/room";
+import { leaveRoom, roomLink } from "../../api/room";
 import { voteOrNot } from "../../api/vote";
 
 const Wrap = styled.div`
@@ -265,6 +265,18 @@ export const RoomBox = ({ roomData }) => {
     leaveRoom(roomData.roomId);
   };
 
+  const LinkHandler = async () => {
+    try {
+      console.log(roomData.roomId);
+      const data = await roomLink(roomData.roomId);
+      await navigator.clipboard.writeText(data);
+      alert("클립보드에 복사되었습니다.");
+    } catch (err) {
+      console.log(err);
+      alert("클립보드 복사에 실패하였습니다.");
+    }
+  };
+
   return (
     <>
       <Wrap>
@@ -321,7 +333,7 @@ export const RoomBox = ({ roomData }) => {
                   {"룸 이름 편집하기"}
                 </EditDiv>
 
-                <EditDiv>{"친구 초대하기"}</EditDiv>
+                <EditDiv onClick={LinkHandler}>{"친구 초대하기"}</EditDiv>
 
                 <EditDiv
                   onClick={leaveRoomHandler}
