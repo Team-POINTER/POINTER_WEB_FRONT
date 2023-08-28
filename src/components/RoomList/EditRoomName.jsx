@@ -118,12 +118,18 @@ export const EditRoomName = ({
   const [roomNm, setRoomNm] = useState(null);
   const dispatch = useDispatch();
   const update = () => {
+    if (!updateRoomForm.roomNm) {
+      alert("룸 이름을 입력해주세요");
+      return;
+    }
+
     const dto = {
       privateRoomNm: updateRoomForm.roomNm,
       roomId: updateRoomForm.roomId,
     };
     dispatch(RoomService.updateRoomNm(dto)).then((res) => {
       setEditNameOpen(false);
+      alert("룸 이름이 변경되었습니다!");
       handleClose();
       dispatch(RoomService.getRoomList({ keyword: "" }));
     });
