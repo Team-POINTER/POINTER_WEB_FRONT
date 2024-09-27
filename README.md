@@ -66,5 +66,6 @@ These are the rooms that users can enter. Users can create new room in this page
   The user can report slendering contents to the administrator.
 
 ## Contact
-MinSeop Kwak
+MinSeop Kwak 
+
 ChoMyeong Yang
